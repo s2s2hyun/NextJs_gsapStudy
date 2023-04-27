@@ -8,6 +8,7 @@ import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 interface Board {
   id: string;
@@ -19,6 +20,7 @@ interface Board {
 const useStyles = makeStyles((theme: Theme) => ({
   customText: {
     color: theme.palette.text.primary,
+    textAlign: "center",
   },
   customBackground: {
     backgroundColor: theme.palette.background.default,
@@ -42,7 +44,12 @@ export default function Home() {
       });
   }, []);
 
-  console.log(boardList, "boardList 나와라");
+  const router = useRouter();
+
+  const handleBoardClick = (id: string) => {
+    router.push(`/board/${id}`);
+  };
+
   return (
     <>
       <main
@@ -55,12 +62,24 @@ export default function Home() {
           alignItems: "center",
           flexDirection: "column",
         }}>
-        <div className={classes.customText}>메인페이지</div>
+        <div className={classes.customText} style={{ paddingBottom: "5rem" }}>
+          게시글 제목
+        </div>
+        <div
+          className={classes.customText}
+          style={{ paddingBottom: "3em", cursor: "pointer" }}
+          onClick={() => router.push("/boardWrite")}>
+          글쓰기
+        </div>
         <div className={classes.customText}>
           {boardList.map((board) => {
             return (
-              <div key={board.id}>
-                <div>{board.title}</div>
+              <div
+                key={board.id}
+                style={{ cursor: "pointer", padding: "1rem" }}>
+                <div onClick={() => handleBoardClick(board.id)}>
+                  {board.title}
+                </div>
               </div>
             );
           })}
