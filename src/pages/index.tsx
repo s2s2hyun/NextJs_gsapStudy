@@ -9,6 +9,7 @@ import { Theme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useAuth } from "@/ilb/auth";
 
 interface Board {
   id: string;
@@ -52,6 +53,7 @@ export default function Home() {
 
   return (
     <>
+      <LayHeader />
       <main
         className={classes.customBackground}
         style={{
@@ -61,14 +63,16 @@ export default function Home() {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-        }}>
+        }}
+      >
         <div className={classes.customText} style={{ paddingBottom: "5rem" }}>
           게시글 제목
         </div>
         <div
           className={classes.customText}
           style={{ paddingBottom: "3em", cursor: "pointer" }}
-          onClick={() => router.push("/boardWrite")}>
+          onClick={() => router.push("/boardWrite")}
+        >
           글쓰기
         </div>
         <div className={classes.customText}>
@@ -76,7 +80,8 @@ export default function Home() {
             return (
               <div
                 key={board.id}
-                style={{ cursor: "pointer", padding: "1rem" }}>
+                style={{ cursor: "pointer", padding: "1rem" }}
+              >
                 <div onClick={() => handleBoardClick(board.id)}>
                   {board.title}
                 </div>
@@ -88,3 +93,8 @@ export default function Home() {
     </>
   );
 }
+
+const LayHeader = () => {
+  const username = useSelector((state: RootState) => state.user.username);
+  return <div>username:{username}</div>;
+};
