@@ -1,5 +1,6 @@
 import { updateAccessToken, updateRefreshToken } from "@/store/feature/actions";
-import { setLoginUsername } from "@/store/feature/userSlice";
+import { login } from "@/store/feature/userSlice";
+
 import { RootState } from "@/store/store";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -20,11 +21,7 @@ export default function LoginPage() {
         password,
       });
       console.log(response.data);
-      // 토큰을 Redux 스토어에 저장
-      const { access_token, refresh_token } = response.data;
-      dispatch(updateAccessToken(access_token));
-      dispatch(updateRefreshToken(refresh_token));
-      dispatch(setLoginUsername(username)); // username을 리덕스로 저장
+      dispatch(login({ username, password })); // username과 password를 리덕스로 저장
       router.push("/");
     } catch (error) {
       console.error(error);
