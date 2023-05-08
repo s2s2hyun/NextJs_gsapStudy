@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/ilb/auth";
 import Head from "next/head";
 import { styled } from "@mui/system";
+import { logout } from "@/store/feature/userSlice";
 
 interface Board {
   id: string;
@@ -49,6 +50,15 @@ const CustomBackground = styled("main")(({ theme }) => ({
   flexDirection: "column",
 }));
 
+const LayHeaderCustomBackground = styled("main")(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+}));
+
 export default function Home() {
   // const classes = useStyles();
   const [boardList, setBoardList] = useState<Board[]>([]);
@@ -78,8 +88,7 @@ export default function Home() {
         <CustomText style={{ paddingBottom: "5rem" }}>게시글 제목</CustomText>
         <CustomText
           style={{ paddingBottom: "3em", cursor: "pointer" }}
-          onClick={() => router.push("/boardWrite")}
-        >
+          onClick={() => router.push("/boardWrite")}>
           글쓰기
         </CustomText>
         <CustomText>
@@ -87,8 +96,7 @@ export default function Home() {
             return (
               <CustomText
                 key={board.id}
-                style={{ cursor: "pointer", padding: "1rem" }}
-              >
+                style={{ cursor: "pointer", padding: "1rem" }}>
                 <div onClick={() => handleBoardClick(board.id)}>
                   {board.title}
                 </div>
@@ -103,6 +111,7 @@ export default function Home() {
 
 const LayHeader = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [isClient, setIsClient] = useState(false);
   const username = useSelector((state: RootState) => state.user.username);
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -111,16 +120,41 @@ const LayHeader = () => {
     setIsClient(true);
   }, []);
 
+  // 로그아웃시 useEffect
+  useEffect(() => {
+    // This will be executed whenever isLoggedIn state changes
+    console.log("isLoggedIn changed:", isLoggedIn);
+  }, [isLoggedIn]);
+
+  const handleLogout = () => {
+    axios
+      .post(
+        "http://localhost:8080/auth/logout",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        dispatch(logout());
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
-      <div>
-        <div>
+      <LayHeaderCustomBackground>
+        <CustomText>
           {isClient && (
             <>
               username:{username}
               {isLoggedIn ? (
                 <>
-                  <CustomText>logout</CustomText>
+                  <CustomText onClick={handleLogout}>logout</CustomText>
                 </>
               ) : (
                 <>
@@ -134,8 +168,8 @@ const LayHeader = () => {
               )}
             </>
           )}
-        </div>
-      </div>
+        </CustomText>
+      </LayHeaderCustomBackground>
     </>
   );
 };

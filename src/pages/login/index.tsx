@@ -1,3 +1,4 @@
+import { KAKAO_AUTH_URL } from "@/auth/Oauth";
 import { updateAccessToken, updateRefreshToken } from "@/store/feature/actions";
 import { login } from "@/store/feature/userSlice";
 
@@ -28,7 +29,9 @@ export default function LoginPage() {
     }
   };
 
-  console.log(username);
+  const handleKakaoLogin = () => {
+    router.push(KAKAO_AUTH_URL);
+  };
   return (
     <section>
       <div onClick={() => router.push("/")}>Home</div>
@@ -40,6 +43,7 @@ export default function LoginPage() {
         <input value={password} onChange={(e) => setPassword(e.target.value)} />
         <button type="submit">로긴</button>
       </form>
+      <div onClick={handleKakaoLogin}>kakao login</div>
     </section>
   );
 }
