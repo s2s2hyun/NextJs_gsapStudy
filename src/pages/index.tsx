@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/ilb/auth";
 import Head from "next/head";
 import { styled } from "@mui/system";
-import { logout } from "@/store/feature/userSlice";
+import { login, logout } from "@/store/feature/userSlice";
 
 interface Board {
   id: string;
@@ -115,16 +115,40 @@ const LayHeader = () => {
   const [isClient, setIsClient] = useState(false);
   const username = useSelector((state: RootState) => state.user.username);
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   // 로그아웃시 useEffect
+  // useEffect(() => {
+  //   // This will be executed whenever isLoggedIn state changes
+  //   console.log("isLoggedIn changed:", isLoggedIn);
+  // }, [isLoggedIn]);
+
   useEffect(() => {
-    // This will be executed whenever isLoggedIn state changes
-    console.log("isLoggedIn changed:", isLoggedIn);
-  }, [isLoggedIn]);
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/auth/userInfo",
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(response.data.username);
+        dispatch(login({ username: response.data.username }));
+      } catch (error: any) {
+        if (error.response && error.response.status === 401) {
+          // 401 Unauthorized 에러 발생시 로그아웃 처리
+          dispatch(logout());
+        } else {
+          console.error(error);
+        }
+      }
+    };
+    fetchUser();
+  }, []);
 
   const handleLogout = () => {
     axios
@@ -141,6 +165,7 @@ const LayHeader = () => {
       .then((res) => {
         console.log(res);
         dispatch(logout());
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
@@ -151,9 +176,9 @@ const LayHeader = () => {
         <CustomText>
           {isClient && (
             <>
-              username:{username}
               {isLoggedIn ? (
                 <>
+                  username:{username}
                   <CustomText onClick={handleLogout}>logout</CustomText>
                 </>
               ) : (

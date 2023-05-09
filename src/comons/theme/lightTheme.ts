@@ -50,6 +50,9 @@ export const lightTheme = {
         text: {
           darkBtn: "#fff",
         },
+        kakaoBg: {
+          light: "yellow",
+        },
       },
     },
   },
