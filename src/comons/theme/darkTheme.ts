@@ -63,13 +63,11 @@ export const darkTheme = {
     fontSize: 16,
     pxToRem,
     h2: {
-      lineHeight: "1",
       color: "#BDBDBD",
       fontSize: "4rem",
-      fontWeight: "300",
+      fontWeight: "normal",
     },
     subtitle1: {
-      lineHeight: "1",
       color: "#333333",
       fontSize: "4rem",
       fontWeight: "bold",

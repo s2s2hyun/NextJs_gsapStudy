@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, openModal } from "@/store/feature/modalSlice";
 import { RootState } from "@/store/store";
-import ConfirmModal from "@/components/Modal/ConfirmModal";
+import ConfirmModal from "@/components/Modal/LoginModal";
 // import styled from "@emotion/styled";
 import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material/styles";
@@ -13,6 +13,7 @@ import { useAuth } from "@/ilb/auth";
 import Head from "next/head";
 import { styled } from "@mui/system";
 import { login, logout } from "@/store/feature/userSlice";
+import LoginModalPage from "@/components/Modal/LoginModal";
 
 interface Board {
   id: string;
@@ -39,7 +40,7 @@ const CustomText = styled("div")(({ theme }) => ({
   cursor: "pointer",
 }));
 
-const CustomBackground = styled("main")(({ theme }) => ({
+const CustomBackground = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   minHeight: "100vh",
   width: "100%",
@@ -50,7 +51,7 @@ const CustomBackground = styled("main")(({ theme }) => ({
   flexDirection: "column",
 }));
 
-const LayHeaderCustomBackground = styled("main")(({ theme }) => ({
+const LayHeaderCustomBackground = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   width: "100%",
   display: "flex",
@@ -115,7 +116,11 @@ const LayHeader = () => {
   const [isClient, setIsClient] = useState(false);
   const username = useSelector((state: RootState) => state.user.username);
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
-  const [user, setUser] = useState(null);
+  const [isLoginModalOpen, setIsLogginModalOpen] = useState<boolean>(false);
+
+  const handleLoginClick = () => {
+    setIsLogginModalOpen(!isLoginModalOpen);
+  };
 
   useEffect(() => {
     setIsClient(true);
@@ -195,6 +200,12 @@ const LayHeader = () => {
           )}
         </CustomText>
       </LayHeaderCustomBackground>
+      {isLoginModalOpen ? (
+        <LoginModalPage
+          setIsLogginModalOpen={setIsLogginModalOpen}
+          isLoginModalOpen={isLoginModalOpen}
+        />
+      ) : null}
     </>
   );
 };
