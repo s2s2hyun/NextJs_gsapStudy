@@ -188,9 +188,7 @@ const LayHeader = () => {
                 </>
               ) : (
                 <>
-                  <CustomText onClick={() => router.push("/login")}>
-                    login
-                  </CustomText>
+                  <CustomText onClick={handleLoginClick}>login</CustomText>
                   <CustomText onClick={() => router.push("/signup")}>
                     signup
                   </CustomText>

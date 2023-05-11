@@ -84,7 +84,6 @@ export default function LoginPage() {
                   placeholder="입력해주세요"
                 />
               </div>
-
               <CustomButton type="submit">로그인</CustomButton>
             </LoginForm>
             <div style={{ display: "flex", gap: "1rem" }}>
@@ -134,12 +133,6 @@ const CustomIdText = styled(Typography)<
   color: theme.palette.text.primary,
   fontSize: "20px",
   minWidth: "120px",
-}));
-
-const CustomTextTitle = styled("div")(({ theme }) => ({
-  color: theme.palette.text.primary,
-  textAlign: "center",
-  cursor: "pointer",
 }));
 
 const CustomBackground = styled("main")(({ theme }) => ({
@@ -195,13 +188,4 @@ const GoogleButton = styled("button")(({ theme }) => ({}) => ({
   alignItems: "center",
   justifyContent: "center",
   width: "200px",
-}));
-
-const LayHeaderCustomBackground = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
 }));
