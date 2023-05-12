@@ -161,12 +161,12 @@ const CustomIdText = styled(Typography)<
 }));
 
 const CustomButton = styled("button")(({ theme }) => ({
-  backgroundColor: theme.palette.custom.button.bg.darkBtn,
+  backgroundColor: theme.custom.button.bg.darkBtn,
+  color: theme.custom.button.text.darkBtn,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  color: theme.palette.custom.button.text.darkBtn,
   width: "360px",
   height: "56px",
   fontSize: "18px",

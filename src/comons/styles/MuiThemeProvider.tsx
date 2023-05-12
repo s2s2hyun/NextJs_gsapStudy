@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, Theme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { darkTheme } from "../theme/darkTheme";
 import { lightTheme } from "../theme/lightTheme";
@@ -16,7 +16,7 @@ const MuiThemeProvider = ({ children }: CustomThemeProviderProps) => {
   };
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={isDarkMode ? darkTheme : (lightTheme as Theme)}>
       <div
         style={{
           position: "fixed",

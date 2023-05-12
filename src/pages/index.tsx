@@ -1,11 +1,6 @@
-import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, openModal } from "@/store/feature/modalSlice";
 import { RootState } from "@/store/store";
-import ConfirmModal from "@/components/Modal/LoginModal";
-// import styled from "@emotion/styled";
 import { makeStyles } from "@mui/styles";
-import { Theme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -14,6 +9,9 @@ import Head from "next/head";
 import { styled } from "@mui/system";
 import { login, logout } from "@/store/feature/userSlice";
 import LoginModalPage from "@/components/Modal/LoginModal";
+import Container from "@mui/material/Container";
+import { CustomTheme } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 interface Board {
   id: string;
@@ -22,29 +20,20 @@ interface Board {
   status: string;
 }
 
-// const useStyles = makeStyles((theme: Theme) => ({
-//   customText: {
-//     color: theme.palette.text.primary,
-//     textAlign: "center",
-//     cursor: "pointer",
-//   },
-//   customBackground: {
-//     backgroundColor: theme.palette.background.default,
-//     minHeight: "100vh", // Optional: to cover the full viewport height
-//   },
-// }));
+const useStyles = makeStyles((theme: CustomTheme) => ({
+  container: {
+    background: theme.custom.container.background,
+  },
+}));
 
 const CustomText = styled("div")(({ theme }) => ({
   color: theme.palette.text.primary,
-  textAlign: "center",
   cursor: "pointer",
 }));
 
 const CustomBackground = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  minHeight: "100vh",
   width: "100%",
-  height: "100vh",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -58,6 +47,36 @@ const LayHeaderCustomBackground = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+}));
+
+const InnerContainer = styled("div")(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  border: "2px solid #ccc",
+  borderRadius: "5px",
+}));
+
+const BoradTitle = styled("h3")(({ theme }) => ({
+  fontSize: "24px",
+}));
+
+const BoradInfo = styled("div")(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const BoardListNumberText = styled("p")(({ theme }) => ({
+  color: theme.palette.text.primary,
+  fontSize: "14px",
+  // textAlign:"center",
+  cursor: "pointer",
 }));
 
 export default function Home() {
@@ -86,25 +105,66 @@ export default function Home() {
     <>
       <LayHeader />
       <CustomBackground>
-        <CustomText style={{ paddingBottom: "5rem" }}>게시글 제목</CustomText>
-        <CustomText
-          style={{ paddingBottom: "3em", cursor: "pointer" }}
-          onClick={() => router.push("/boardWrite")}>
-          글쓰기
-        </CustomText>
-        <CustomText>
-          {boardList.map((board) => {
-            return (
-              <CustomText
-                key={board.id}
-                style={{ cursor: "pointer", padding: "1rem" }}>
-                <div onClick={() => handleBoardClick(board.id)}>
-                  {board.title}
-                </div>
-              </CustomText>
-            );
-          })}
-        </CustomText>
+        <Container maxWidth="xl">
+          <InnerContainer>
+            <BoradInfo>
+              <BoradTitle>게시글</BoradTitle>
+              <div style={{ display: "table", width: "100%" }}>
+                {boardList.map((board) => (
+                  <div key={board.id} style={{ display: "table-row" }}>
+                    <div
+                      style={{
+                        width: "80px",
+                        borderLeft: "1px solid #fafafa",
+                        display: "table-cell",
+                        textAlign: "center",
+                        borderBottom: "1px solid #e2e2e2",
+                      }}>
+                      <BoardListNumberText>titlenum</BoardListNumberText>
+                    </div>
+                    <div></div>
+                    <div
+                      style={{
+                        display: "table-cell",
+                        borderBottom: "1px solid #e2e2e2",
+                      }}
+                      onClick={() => handleBoardClick(board.id)}>
+                      {board.title}
+                    </div>
+                    <div
+                      style={{
+                        display: "table-cell",
+                        borderBottom: "1px solid #e2e2e2",
+                      }}>
+                      CreateTime
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </BoradInfo>
+            {/* <CustomText style={{ paddingBottom: "5rem" }}>
+              게시글 제목
+            </CustomText>
+            <CustomText
+              style={{ paddingBottom: "3em", cursor: "pointer" }}
+              onClick={() => router.push("/boardWrite")}>
+              글쓰기
+            </CustomText>
+            <CustomText>
+              {boardList.map((board) => {
+                return (
+                  <CustomText
+                    key={board.id}
+                    style={{ cursor: "pointer", padding: "1rem" }}>
+                    <div onClick={() => handleBoardClick(board.id)}>
+                      {board.title}
+                    </div>
+                  </CustomText>
+                );
+              })}
+            </CustomText> */}
+          </InnerContainer>
+        </Container>
       </CustomBackground>
     </>
   );

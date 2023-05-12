@@ -1,105 +1,44 @@
-const pxToRem = (size: number) => `${size / 16}rem`;
+import { createTheme } from "@mui/material/styles";
+import { lightTheme } from "./lightTheme";
 
-declare module "@mui/material/styles" {
-  interface Theme extends CustomTheme {}
-}
-
-interface CustomTheme {
-  custom: {
-    footer: {
-      background: string;
-      text: string;
-    };
-    button: {
-      bg: {
-        darkBtn: string;
-      };
-      text: {
-        darkBtn: string;
-      };
-    };
-  };
-}
-
-export const darkTheme = {
+export const darkTheme = createTheme({
+  ...lightTheme,
   palette: {
+    ...lightTheme.palette,
     mode: "dark",
     primary: {
       main: "#8E26DF",
-      contrastText: "#fff",
+    },
+    secondary: {
+      main: "#FF4081",
+    },
+    error: {
+      main: "#F44336",
     },
     background: {
       default: "#333333",
       paper: "#181818",
-      overlay: "#000000",
     },
     text: {
       primary: "#ffffff",
-      contrastText: "#000000",
       secondary: "#BDBDBD",
-      tertiary: "#DADADA",
-      quaternary: "#333333",
     },
-    custom: {
-      footer: {
-        background: "#2C2C2C",
-        text: "#C8C8C8",
+  },
+  custom: {
+    container: {
+      background: "#fff",
+    },
+    footer: {
+      background: "#2C2C2C",
+      text: "#C8C8C8",
+    },
+    button: {
+      bg: {
+        darkBtn: "#fff",
       },
-      button: {
-        bg: {
-          darkBtn: "#fff",
-        },
-        text: {
-          darkBtn: "#000",
-        },
-        kakaoBg: {
-          light: "yellow",
-        },
+      text: {
+        darkBtn: "#000",
       },
     },
   },
-  typography: {
-    fontFamily: "NotoSans",
-    fontSize: 16,
-    pxToRem,
-    h2: {
-      color: "#BDBDBD",
-      fontSize: "4rem",
-      fontWeight: "normal",
-    },
-    subtitle1: {
-      color: "#333333",
-      fontSize: "4rem",
-      fontWeight: "bold",
-    },
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 900,
-      lg: 1400,
-      xl: 1536,
-    },
-  },
-  components: {
-    MuiMenuItem: {
-      styleOverrides: {
-        root: {
-          "&:hover": {
-            backgroundColor: "unset",
-          },
-        },
-      },
-    },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "unset",
-          backgroundImage: "none",
-          backdropFilter: "blur(5px)",
-        },
-      },
-    },
-  },
-};
+});

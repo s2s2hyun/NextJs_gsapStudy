@@ -1,11 +1,10 @@
-const pxToRem = (size: number) => `${size / 16}rem`;
+import { createTheme, Theme, ThemeOptions } from "@mui/material/styles";
 
-declare module "@mui/material/styles" {
-  interface Theme extends CustomTheme {}
-}
-
-interface CustomTheme {
+interface CustomTheme extends ThemeOptions {
   custom: {
+    container: {
+      background: string;
+    };
     footer: {
       background: string;
       text: string;
@@ -21,45 +20,38 @@ interface CustomTheme {
   };
 }
 
-export const lightTheme = {
+declare module "@mui/material/styles" {
+  interface Theme extends CustomTheme {}
+  interface ThemeOptions extends CustomTheme {}
+}
+
+const baseTheme = createTheme();
+
+export const lightTheme: Theme = {
+  ...baseTheme,
   palette: {
+    ...baseTheme.palette,
     mode: "light",
     primary: {
       main: "#8E26DF",
+      light: "#ABCDEF",
+      dark: "#123456",
       contrastText: "#fff",
     },
     background: {
-      default: "#ffffff", // Change this to a lighter color
-      paper: "#f0f0f0", // Change this to a lighter color as well
+      default: "#ffffff",
+      paper: "#f0f0f0",
     },
     text: {
-      primary: "#333333", // Change this to a darker color
+      primary: "#333333",
       secondary: "#BDBDBD",
-      tertiary: "#DADADA",
-      quaternary: "#333333",
-    },
-    custom: {
-      footer: {
-        background: "#2C2C2C",
-        text: "#C8C8C8",
-      },
-      button: {
-        bg: {
-          darkBtn: "#000",
-        },
-        text: {
-          darkBtn: "#fff",
-        },
-        kakaoBg: {
-          light: "yellow",
-        },
-      },
+      disabled: "#FF0000",
     },
   },
   typography: {
+    ...baseTheme.typography,
     fontFamily: "NotoSans",
     fontSize: 16,
-    pxToRem,
     h2: {
       color: "#BDBDBD",
       fontSize: "4rem",
@@ -72,7 +64,9 @@ export const lightTheme = {
     },
   },
   breakpoints: {
+    ...baseTheme.breakpoints,
     values: {
+      ...baseTheme.breakpoints.values,
       xs: 0,
       sm: 600,
       md: 900,
@@ -81,6 +75,7 @@ export const lightTheme = {
     },
   },
   components: {
+    ...baseTheme.components,
     MuiMenuItem: {
       styleOverrides: {
         root: {
@@ -97,6 +92,23 @@ export const lightTheme = {
           backgroundImage: "none",
           backdropFilter: "blur(5px)",
         },
+      },
+    },
+  },
+  custom: {
+    container: {
+      background: "#fff",
+    },
+    footer: {
+      background: "#2C2C2C",
+      text: "#C8C8C8",
+    },
+    button: {
+      bg: {
+        darkBtn: "#000",
+      },
+      text: {
+        darkBtn: "#fff",
       },
     },
   },
