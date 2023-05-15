@@ -3,6 +3,9 @@ import "@mui/material/styles";
 declare module "@mui/material/styles" {
   interface CustomPalette {
     custom: {
+      container: {
+        background: string;
+      };
       footer: {
         background: string;
         text: string;
@@ -21,6 +24,7 @@ declare module "@mui/material/styles" {
   interface Palette extends CustomPalette {}
 
   interface CustomTheme {
+    custom: any;
     palette: Palette;
   }
 
