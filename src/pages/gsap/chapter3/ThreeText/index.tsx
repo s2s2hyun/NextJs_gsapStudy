@@ -14,6 +14,10 @@ export default function DistributeAnimation() {
   useEffect(() => {
     if (utilsRef.current) {
       const children = Array.from(utilsRef.current.children);
+
+      const delay = duration * (children.length - 1);
+      console.log(delay, "children delay");
+
       gsap.set(children, { transformOrigin: "50% 50% -50" });
       const tl = gsap.timeline({
         repeat: -1,
@@ -22,14 +26,27 @@ export default function DistributeAnimation() {
       tl.fromTo(
         children,
         { rotateX: -90, rotateY: -90, opacity: 0 },
-        { rotateX: 0, rotateY: 0, opacity: 1, stagger: duration }
+        {
+          rotateX: 0,
+          rotateY: 0,
+          opacity: 1,
+          stagger: {
+            each: duration,
+            repeat: -1,
+            repeatDelay: delay,
+          },
+        }
       ).to(
         children,
         {
           rotateX: 90,
           rotateY: 90,
           opacity: 0,
-          stagger: duration,
+          stagger: {
+            each: duration,
+            repeat: -1,
+            repeatDelay: delay,
+          },
         },
         duration
       );

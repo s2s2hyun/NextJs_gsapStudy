@@ -46,9 +46,9 @@ export default function StaggerLoopAnimation() {
         each: 0.1,
         from: "random",
         ease: "power1",
-        onComplete() {
+        onComplete(this: gsap.core.Tween) {
           // console.log(this.targets()[0]);
-          gsap.to(this.targets()[0], {
+          gsap.to(this.targets()[0] as HTMLElement, {
             delay: 0.5,
             duration: 2,
             color: "#51ff00",

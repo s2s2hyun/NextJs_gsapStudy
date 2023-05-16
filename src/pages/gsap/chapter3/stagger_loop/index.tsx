@@ -26,22 +26,53 @@ export default function StaggerLoopAnimation() {
         .querySelector(".stage")
         ?.insertAdjacentHTML("beforeend", template);
     }
-
-    gsap.to(".box", {
-      duration: 1,
-      scale: 0.1,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1",
+    const tween = gsap.to(".box", {
+      scale: 0.3,
       stagger: {
-        each: 0.1,
-        from: "edges",
-        grid: "auto",
-        //grid 미친 개쩌네
-        // axis: "x",
-        // axis x 축 , y축
+        each: 0.5,
+        onStart(this: gsap.core.Tween) {
+          // console.log("start");
+          const target = this.targets()[0] as HTMLElement;
+
+          if (target.dataset.stop === "stop") {
+            tween.pause(this.startTime());
+          }
+        },
       },
     });
+
+    const stage = document.querySelector(".stage");
+
+    stage?.addEventListener("click", (e) => {
+      const targetElement = e.target as Element; // Type assertion here
+      // console.log(targetElement);
+
+      if (targetElement?.matches(".box")) {
+        gsap.to(targetElement, {
+          backgroundColor: "red",
+          attr: {
+            "data-stop": "stop",
+            // "aria-label": "button",
+          },
+        });
+        // targetElement.setAttribute("data-stop", "stop");
+      }
+    });
+    // gsap.to(".box", {
+    //   duration: 1,
+    //   scale: 0.1,
+    //   repeat: -1,
+    //   yoyo: true,
+    //   ease: "power1",
+    //   stagger: {
+    //     each: 0.1,
+    //     from: "edges",
+    //     grid: "auto",
+    //     //grid 미친 개쩌네
+    //     // axis: "x",
+    //     // axis x 축 , y축
+    //   },
+    // });
   });
 
   return (
