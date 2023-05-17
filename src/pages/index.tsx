@@ -34,6 +34,7 @@ const CustomText = styled("div")(({ theme }) => ({
 const CustomBackground = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   width: "100%",
+  height: "100vh",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -61,6 +62,7 @@ const InnerContainer = styled("div")(({ theme }) => ({
 
 const BoradTitle = styled("h3")(({ theme }) => ({
   fontSize: "24px",
+  color: theme.palette.text.primary,
 }));
 
 const BoradInfo = styled("div")(({ theme }) => ({
