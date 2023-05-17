@@ -63,7 +63,6 @@ const BoradTitle = styled("h3")(({ theme }) => ({
   fontSize: "24px",
 
   color: theme.palette.text.primary,
-
 }));
 
 const BoradInfo = styled("div")(({ theme }) => ({
@@ -145,6 +144,12 @@ export default function Home() {
                 ))}
               </div>
             </BoradInfo>
+            <div>
+              <video autoPlay muted loop>
+                <source src="/video/backVideo1.mp4" type="video/mp4" />
+              </video>
+            </div>
+
             {/* <CustomText style={{ paddingBottom: "5rem" }}>
               게시글 제목
             </CustomText>

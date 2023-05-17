@@ -107,16 +107,28 @@ export default function ClearProps() {
 
       <div className="bg">
         <div className="ex1">
-          <img src="/assets/images/bg01.jpg" alt="" />
+          <video autoPlay muted loop>
+            <source src="/video/backVideo1.mp4" type="video/mp4" />
+          </video>
+          {/* <img src="/assets/images/bg01.jpg" alt="" /> */}
         </div>
         <div className="ex2">
-          <img src="/assets/images/bg02.jpg" alt="" />
+          <video autoPlay muted loop>
+            <source src="/video/backVideo2.mp4" type="video/mp4" />
+          </video>
+          {/* <img src="/assets/images/bg02.jpg" alt="" /> */}
         </div>
         <div className="ex3">
-          <img src="/assets/images/bg03.jpg" alt="" />
+          <video autoPlay muted loop>
+            <source src="/video/backVideo3.mp4" type="video/mp4" />
+          </video>
+          {/* <img src="/assets/images/bg03.jpg" alt="" /> */}
         </div>
         <div className="ex4">
-          <img src="/assets/images/bg04.jpg" alt="" />
+          <video autoPlay muted loop>
+            <source src="/video/backVideo4.mp4" type="video/mp4" />
+          </video>
+          {/* <img src="/assets/images/bg04.jpg" alt="" /> */}
         </div>
       </div>
     </Wrapper>
@@ -132,8 +144,8 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   .bg {
-    width: 90vw;
-    height: 600px;
+    width: 100%;
+    height: 90vh;
     overflow: hidden;
     position: absolute;
     left: 50%;
@@ -161,6 +173,13 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: 50% 50%;
   }
 
   .bg img {
