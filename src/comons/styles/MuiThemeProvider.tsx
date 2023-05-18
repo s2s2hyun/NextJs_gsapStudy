@@ -15,6 +15,10 @@ const MuiThemeProvider = ({ children }: CustomThemeProviderProps) => {
     console.log(isDarkMode, " isDarkMode");
   };
 
+  // useEffect(() => {
+  //   console.log(isDarkMode, " isDarkMode"); // This will reflect the updated state
+  // }, [isDarkMode]);
+
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : (lightTheme as Theme)}>
       <div

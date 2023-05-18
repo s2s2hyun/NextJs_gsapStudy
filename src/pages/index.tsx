@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
 const CustomText = styled("div")(({ theme }) => ({
   color: theme.palette.text.primary,
   cursor: "pointer",
+  zIndex: "10",
 }));
 
 const CustomBackground = styled("div")(({ theme }) => ({
@@ -56,6 +57,7 @@ const LayHeaderCustomBackground = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+  position: "absolute",
 }));
 
 const InnerContainer = styled("div")(({ theme }) => ({
@@ -64,8 +66,6 @@ const InnerContainer = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  // border: "2px solid #ccc",
-  // borderRadius: "5px",
 }));
 
 const BoradTitle = styled("h3")(({ theme }) => ({
@@ -176,8 +176,7 @@ export default function Home() {
             height: "100vh",
             position: "absolute",
             overflow: "hidden",
-          }}
-        >
+          }}>
           <video
             autoPlay
             muted
@@ -190,8 +189,7 @@ export default function Home() {
               left: "50%",
               top: "50%",
               transform: "translate(-50%, -50%)",
-            }}
-          >
+            }}>
             <source src="/video/backVideo1.mp4" type="video/mp4" />
           </video>
         </div>
@@ -323,48 +321,48 @@ const WordDiv = styled("div")`
 //   //   console.log("isLoggedIn changed:", isLoggedIn);
 //   // }, [isLoggedIn]);
 
-//   useEffect(() => {
-//     const fetchUser = async () => {
-//       try {
-//         const response = await axios.get(
-//           "http://localhost:8080/auth/userInfo",
-//           {
-//             withCredentials: true,
-//           }
-//         );
-//         console.log(response.data.username);
-//         dispatch(login({ username: response.data.username }));
-//       } catch (error: any) {
-//         if (error.response && error.response.status === 401) {
-//           // 401 Unauthorized 에러 발생시 로그아웃 처리
-//           dispatch(logout());
-//         } else {
-//           console.error(error);
-//         }
-//       }
-//     };
-//     fetchUser();
-//   }, []);
+//   // useEffect(() => {
+//   //   const fetchUser = async () => {
+//   //     try {
+//   //       const response = await axios.get(
+//   //         "http://localhost:8080/auth/userInfo",
+//   //         {
+//   //           withCredentials: true,
+//   //         }
+//   //       );
+//   //       console.log(response.data.username);
+//   //       dispatch(login({ username: response.data.username }));
+//   //     } catch (error: any) {
+//   //       if (error.response && error.response.status === 401) {
+//   //         // 401 Unauthorized 에러 발생시 로그아웃 처리
+//   //         dispatch(logout());
+//   //       } else {
+//   //         console.error(error);
+//   //       }
+//   //     }
+//   //   };
+//   //   fetchUser();
+//   // }, []);
 
-//   const handleLogout = () => {
-//     axios
-//       .post(
-//         "http://localhost:8080/auth/logout",
-//         {},
-//         {
-//           withCredentials: true,
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-//           },
-//         }
-//       )
-//       .then((res) => {
-//         console.log(res);
-//         dispatch(logout());
-//         window.location.reload();
-//       })
-//       .catch((err) => console.log(err));
-//   };
+//   // const handleLogout = () => {
+//   //   axios
+//   //     .post(
+//   //       "http://localhost:8080/auth/logout",
+//   //       {},
+//   //       {
+//   //         withCredentials: true,
+//   //         headers: {
+//   //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+//   //         },
+//   //       }
+//   //     )
+//   //     .then((res) => {
+//   //       console.log(res);
+//   //       dispatch(logout());
+//   //       window.location.reload();
+//   //     })
+//   //     .catch((err) => console.log(err));
+//   // };
 
 //   return (
 //     <>
@@ -375,7 +373,11 @@ const WordDiv = styled("div")`
 //               {isLoggedIn ? (
 //                 <>
 //                   username:{username}
-//                   <CustomText onClick={handleLogout}>logout</CustomText>
+//                   <CustomText
+//                   // onClick={handleLogout}
+//                   >
+//                     logout
+//                   </CustomText>
 //                 </>
 //               ) : (
 //                 <>

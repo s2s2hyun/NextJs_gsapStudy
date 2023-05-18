@@ -4,7 +4,6 @@ import { gsap } from "gsap";
 
 export default function CallbackGsap() {
   const spaceRef = useRef<HTMLDivElement>(null);
-
   const leftRef = useRef<HTMLButtonElement>(null);
   const rightRef = useRef<HTMLButtonElement>(null);
   const Planet = [
@@ -30,7 +29,6 @@ export default function CallbackGsap() {
   const z = gsap.utils.distribute({
     base: -18400,
     amount: 18400,
-    // from: "end",
   });
 
   let count = 0;
@@ -41,13 +39,13 @@ export default function CallbackGsap() {
       rotateX: 4,
     });
 
-    leftRef.current?.addEventListener("click", () => {
-      LeftClickNext();
-    });
+    // leftRef.current?.addEventListener("click", () => {
+    //   LeftClickNext();
+    // });
 
-    rightRef.current?.addEventListener("click", () => {
-      RightClickNext();
-    });
+    // rightRef.current?.addEventListener("click", () => {
+    //   RightClickNext();
+    // });
   }, []);
 
   const RightClickNext = () => {
@@ -75,12 +73,10 @@ export default function CallbackGsap() {
   return (
     <Wrapper>
       <button className="left" onClick={LeftClickNext}>
-        {" "}
-        ←{" "}
+        ←
       </button>
       <button className="right" onClick={RightClickNext}>
-        {" "}
-        →{" "}
+        →
       </button>
       <div className="space" ref={spaceRef}>
         {Planets}
@@ -113,7 +109,6 @@ const Wrapper = styled.div`
       position: absolute;
       left: 0;
       right: 0;
-      /* transform: translate(-50%,-50%); */
     }
 
     .solar_system .planet {
@@ -121,15 +116,12 @@ const Wrapper = styled.div`
       width: 1200px;
       border-radius: 600px;
       background: red;
-      /* transition: transform 2.8s 0.23s cubic-bezier(0.33, 0, 0, 1), opacity 2s 0.8s, box-shadow 0s 0s; */
       background-size: 1140px 910px !important;
-      /* top: auto; */
       bottom: -920px;
       position: absolute;
       left: 0;
       right: 0;
-      /* top: 50%; */
-      /* transform: translateY(-50%); */
+
       margin: auto;
     }
 
