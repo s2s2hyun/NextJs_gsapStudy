@@ -6,14 +6,14 @@ const GlobalStyles = () => (
       /* Add your global styles here */
 
       @font-face {
-        font-family: "Poppins',Sans-serif";
+        font-family: "Poppins";
         src: url("/assets/fonts/Poppins-Medium.ttf") format("truetype");
         font-weight: normal;
         font-style: normal;
       }
       body {
         margin: 0;
-        font-family: "Poppins',Sans-serif", sans-serif;
+        font-family: "Poppins", Sans-serif;
       }
     `}
   />
