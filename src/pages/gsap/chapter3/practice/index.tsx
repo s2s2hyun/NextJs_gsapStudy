@@ -66,7 +66,7 @@ export default function CallbackGsap() {
     gsap.to(".planet", {
       z: "-= 2300",
       ease: "power3.inOut",
-      // duration: 1,
+      duration: 1,
     });
   };
 

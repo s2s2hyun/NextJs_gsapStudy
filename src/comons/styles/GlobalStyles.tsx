@@ -7,7 +7,7 @@ const GlobalStyles = () => (
 
       @font-face {
         font-family: "Poppins";
-        src: url("/assets/fonts/Poppins-Medium.ttf") format("truetype");
+        src: url("/assets/font/Poppins-Medium.ttf") format("truetype");
         font-weight: normal;
         font-style: normal;
       }

@@ -28,6 +28,7 @@ const MuiThemeProvider = ({ children }: CustomThemeProviderProps) => {
           bottom: "5rem",
           cursor: "pointer",
           userSelect: "none",
+          zIndex: "10",
         }}
         onClick={handleThemeChange}>
         {isDarkMode ? <>☀️</> : <>🌙</>}

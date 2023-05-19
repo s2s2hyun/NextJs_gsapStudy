@@ -168,7 +168,28 @@ export default function Home() {
 
   return (
     <>
-      {/* <LayHeader /> */}
+      <Head>
+        <title>Your Unique Page Title</title>
+        <meta
+          name="description"
+          content="A brief summary of the content of your page."
+        />
+      </Head>
+
+      {/* <Head>
+        <title>{data.pageTitle}</title>
+        <meta name="description" content={data.pageDescription} />
+        <meta name="keywords" content={data.keywords.join(',')} />
+        <meta name="robots" content="index,follow" />
+        <meta name="twitter:title" content={data.pageTitle} />
+        <meta name="twitter:description" content={data.pageDescription} />
+        <meta name="twitter:image" content={data.imageURL} />
+        <meta property='og:type' content='website' />
+        <meta property='og:site_name' content={data.pageName} />
+        <meta property="og:title" content={data.pageTitle} />
+        <meta property="og:description" content={data.pageDescription} />
+        <meta property="og:image" content={data.imageURL} />
+      </Head> */}
       <CustomBackground>
         <div
           style={{
@@ -212,69 +233,30 @@ export default function Home() {
                 </div>
               </div>
             </WordDiv>
-            {/* <BoradInfo>
-              <BoradTitle>게시글</BoradTitle>
-              <div style={{ display: "table", width: "100%" }}>
-                {boardList.map((board) => (
-                  <div key={board.id} style={{ display: "table-row" }}>
-                    <div
-                      style={{
-                        width: "80px",
-                        borderLeft: "1px solid #fafafa",
-                        display: "table-cell",
-                        textAlign: "center",
-                        borderBottom: "1px solid #e2e2e2",
-                      }}>
-                      <BoardListNumberText>titlenum</BoardListNumberText>
-                    </div>
-                    <div></div>
-                    <div
-                      style={{
-                        display: "table-cell",
-                        borderBottom: "1px solid #e2e2e2",
-                      }}
-                      onClick={() => handleBoardClick(board.id)}>
-                      {board.title}
-                    </div>
-                    <div
-                      style={{
-                        display: "table-cell",
-                        borderBottom: "1px solid #e2e2e2",
-                      }}>
-                      CreateTime
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </BoradInfo> */}
-
-            {/* <CustomText style={{ paddingBottom: "5rem" }}>
-              게시글 제목
-            </CustomText>
-            <CustomText
-              style={{ paddingBottom: "3em", cursor: "pointer" }}
-              onClick={() => router.push("/boardWrite")}>
-              글쓰기
-            </CustomText>
-            <CustomText>
-              {boardList.map((board) => {
-                return (
-                  <CustomText
-                    key={board.id}
-                    style={{ cursor: "pointer", padding: "1rem" }}>
-                    <div onClick={() => handleBoardClick(board.id)}>
-                      {board.title}
-                    </div>
-                  </CustomText>
-                );
-              })}
-            </CustomText> */}
           </InnerContainer>
         </Container>
       </CustomBackground>
     </>
   );
 }
+
+// export async function getStaticProps() {
+//   // Fetch your data here...
+
+//   const data = {
+//     pageTitle: "Page Title", // Fetch from API
+//     pageDescription: "Page Description", // Fetch from API
+//     keywords: ["keyword1", "keyword2"], // Fetch from API
+//     imageURL: "http://yourwebsite.com/image.jpg", // Fetch from API
+//     pageName: "Page Name" // Fetch from API
+//   };
+
+//   return {
+//     props: {
+//       data
+//     }
+//   }
+// }
 
 const WordDiv = styled("div")`
   position: "relative";

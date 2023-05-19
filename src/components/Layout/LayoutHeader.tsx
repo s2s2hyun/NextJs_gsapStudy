@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button, { ButtonProps } from "@mui/material/Button";
-
-import { keyframes, styled } from "@mui/system";
+import { keyframes } from "@mui/system";
+import { useTheme } from "@mui/material/styles";
+import styled from "@emotion/styled";
+import { Theme } from "@mui/material/styles";
 
 interface StyledButtonProps extends ButtonProps {
   isClicked?: boolean;
@@ -19,7 +21,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
   boxShadow: "none",
 }));
 
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
+const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
   backdropFilter: "none",
   justifyContent: "center",
   boxShadow: "none",
@@ -71,57 +73,54 @@ const rotateTwoAnimation = keyframes`
   }
 `;
 
-const StyledButton = styled(Button)<StyledButtonProps>(
-  ({ theme, isClicked }) => ({
-    margin: "0",
-    padding: "0",
-    border: "0",
-    // font: inherit;
-    // color: inherit;
-    background: "transparent",
-    overflow: "visible",
+const StyledButton = styled(({ isClicked, ...rest }: StyledButtonProps) => (
+  <Button {...rest} />
+))<StyledButtonProps>(({ theme, isClicked }) => ({
+  margin: "0",
+  padding: "0",
+  border: "0",
+  background: "transparent",
+  overflow: "visible",
+  cursor: "pointer",
+  lineHeight: "1",
+  color: "#fff",
+  display: "flex",
+  flexDirection: "column",
+  "& span": {
+    position: "absolute",
+    left: 0,
+    width: "10%",
+    height: "3px",
+    backgroundColor: "#fff",
+    borderRadius: "1.5px",
     cursor: "pointer",
-    lineHeight: "1",
-    color: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    "& span": {
-      position: "absolute",
-      left: 0,
-      width: "10%",
-      height: "3px",
-      backgroundColor: "#fff",
-      borderRadius: "1.5px",
-      cursor: "pointer",
-    },
-    "& .span_color1": {
-      animation: isClicked ? `${rotateOneAnimation} 0.75s forwards` : "none",
-    },
-    "& .span_color2": {
-      opacity: isClicked ? "0" : "1",
-      marginTop: "1.5rem",
-    },
-    "& .span_color3": {
-      animation: isClicked ? `${rotateTwoAnimation} 0.75s forwards` : "none",
-      marginTop: "3rem",
-    },
-  })
-);
+  },
+  "& .span_color1": {
+    animation: isClicked ? `${rotateOneAnimation} 0.75s forwards` : "none",
+  },
+  "& .span_color2": {
+    opacity: isClicked ? "0" : "1",
+    marginTop: "1.5rem",
+  },
+  "& .span_color3": {
+    animation: isClicked ? `${rotateTwoAnimation} 0.75s forwards` : "none",
+    marginTop: "3rem",
+  },
+}));
 
 export default function LayoutHeader() {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-
+  const theme: Theme = useTheme();
   return (
     <StyledBox>
-      <StyledAppBar position="absolute">
+      <StyledAppBar position="absolute" theme={theme}>
         <Toolbar>
           <StyledButton
             type="button"
             sx={{ flexGrow: 1 }}
             onClick={() => setIsClicked(!isClicked)}
             isClicked={isClicked}
-            disableRipple
-          >
+            disableRipple>
             <span className="span_color1"></span>
             <span className="span_color2"></span>
             <span className="span_color3"></span>
@@ -135,8 +134,7 @@ export default function LayoutHeader() {
               fontFamily: "Poppins, Sans-serif",
               fontWeight: "600",
             }}
-            sx={{ flexGrow: 1 }}
-          >
+            sx={{ flexGrow: 1 }}>
             PPRK
           </Typography>
           <Typography
@@ -148,8 +146,7 @@ export default function LayoutHeader() {
               fontFamily: "Poppins, Sans-serif",
               fontWeight: "600",
             }}
-            sx={{ flexGrow: 1 }}
-          >
+            sx={{ flexGrow: 1 }}>
             한국어
           </Typography>
           {/* <Button color="inherit" style={{ color: "#fff" }}>
