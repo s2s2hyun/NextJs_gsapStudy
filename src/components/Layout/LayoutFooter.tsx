@@ -46,9 +46,12 @@ export default function LayoutFooter() {
                 listStyle: "none",
                 paddingLeft: "0px",
               }}>
-              <li>Github</li>
-              <li>Blog</li>
-              <li>LinkedIn</li>
+              <li>hi</li>
+              <li>hi</li>
+              <li>hi</li>
+              {/* <li>Github</li> */}
+              {/* <li>Blog</li> */}
+              {/* <li>LinkedIn</li> */}
             </ul>
           </div>
         </InnerContainer>
