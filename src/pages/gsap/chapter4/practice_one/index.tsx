@@ -30,6 +30,13 @@ export default function GsapPracticeOne() {
     useRef<HTMLDivElement>(null), // page02forkyRef
   ];
 
+  const threeRefs = [
+    useRef<HTMLDivElement>(null), // page03Ref
+    useRef<HTMLDivElement>(null), // page03BgRef
+    useRef<HTMLDivElement | null>(null), // page03toyRef
+    useRef<HTMLDivElement>(null), // page03forky_Ref
+  ];
+
   useEffect(() => {
     // function page01() {
     //   const page = "page01";
@@ -169,34 +176,160 @@ export default function GsapPracticeOne() {
     // page01()[0]?.play();
 
     // page2
-    function page02() {
-      const page = "#page02";
-      let enterTwo: gsap.core.Timeline | undefined;
-      let leaveTwo: gsap.core.Timeline | undefined;
+    // function page02() {
+    //   const page = "#page02";
+    //   let enterTwo: gsap.core.Timeline | undefined;
+    //   let leaveTwo: gsap.core.Timeline | undefined;
 
-      enterTwo = gsap
-        .timeline({
-          defaults: {
-            duration: 1,
-            opacity: 0,
-          },
-          paused: true,
-        })
-        .to(twoRefs[0].current, {
-          opacity: 1,
-        })
-        .fromTo(
-          twoRefs[2].current,
-          {
-            y: 50,
-          },
-          { y: 0 },
-          "<"
-        )
-        .fromTo(twoRefs[3].current, { y: 0 }, { y: -50 }, "<")
-        .fromTo(twoRefs[4].current, { x: -50 }, { x: 0 }, "<");
+    //   enterTwo = gsap
+    //     .timeline({
+    //       defaults: {
+    //         duration: 1,
+    //         opacity: 0,
+    //       },
+    //       paused: true,
+    //     })
+    //     .fromTo(
+    //       twoRefs[0].current,
+    //       { opacity: 0 },
+    //       {
+    //         opacity: 1,
+    //       }
+    //     )
+    //     .fromTo(
+    //       twoRefs[2].current,
+    //       {
+    //         y: 50,
+    //         opacity: 0,
+    //       },
+    //       { y: 0, opacity: 1 },
+    //       "<"
+    //     )
+    //     .fromTo(
+    //       twoRefs[3].current,
+    //       { opacity: 0, y: 0 },
+    //       { y: -50, opacity: 1 },
+    //       "<"
+    //     )
+    //     .fromTo(
+    //       twoRefs[4].current,
+    //       { opacity: 0, x: -50 },
+    //       { x: 0, opacity: 1 },
+    //       "<"
+    //     )
+    //     .fromTo(
+    //       twoRefs[6].current,
+    //       {
+    //         opacity: 0,
+    //         y: 30,
+    //       },
+    //       {
+    //         opacity: 1,
+    //         y: 0,
+    //       }
+    //     )
+    //     .fromTo(
+    //       twoRefs[7].current,
+    //       {
+    //         opacity: 0,
+    //         y: 30,
+    //       },
+    //       {
+    //         opacity: 1,
+    //         y: 0,
+    //       },
+    //       "-=0.5"
+    //     );
 
-      leaveTwo = gsap.timeline({
+    //   leaveTwo = gsap
+    //     .timeline({
+    //       defaults: {
+    //         duration: 1,
+    //         opacity: 0,
+    //       },
+    //       paused: true,
+    //     })
+    //     .to(twoRefs[6].current, {
+    //       y: 30,
+    //       opacity: 0,
+    //     })
+    //     .to(
+    //       twoRefs[7].current,
+    //       {
+    //         y: 30,
+    //         opacity: 0,
+    //       },
+    //       "-=0.5"
+    //     )
+    //     .to(twoRefs[2], {
+    //       y: 50,
+    //       opacity: 0,
+    //     })
+    //     .to(twoRefs[3].current, { x: -50, opacity: 0 }, "<")
+    //     .to(twoRefs[4].current, { x: 50, opacity: 0 }, "<")
+    //     .to(twoRefs[1].current, { opacity: 0 }, "<")
+    //     .to(
+    //       twoRefs[0].current,
+    //       {
+    //         opacity: 0,
+    //         duration: 1,
+    //       },
+    //       "<"
+    //     );
+
+    //   return [enterTwo, leaveTwo];
+    // }
+
+    // const [enterTwo, leaveTwo] = page02();
+
+    //   page3
+    function page03() {
+      const page = "#page03";
+      let enterThree: gsap.core.Timeline | undefined;
+      let leaveThree: gsap.core.Timeline | undefined;
+      if (threeRefs[2] && threeRefs[2].current) {
+        enterThree = gsap
+          .timeline({
+            defaults: {
+              duration: 1,
+              opacity: 0,
+            },
+            paused: true,
+          })
+          .fromTo(
+            threeRefs[0].current,
+            { opacity: 0 },
+            {
+              opacity: 1,
+            }
+          )
+          .fromTo(
+            threeRefs[1].current,
+            {
+              scale: 1,
+              opacity: 0,
+            },
+            { scale: 1.5, opacity: 1 },
+            "<"
+          )
+          .fromTo(
+            threeRefs[2].current.children,
+            {
+              opacity: 0,
+              scale: 0.5,
+            },
+            {
+              stagger: {
+                each: 0.1,
+              },
+              opacity: 1,
+              y: 100,
+              z: 500,
+            }
+          );
+      }
+
+      leaveThree = gsap.timeline({
         defaults: {
           duration: 1,
           opacity: 0,
@@ -204,14 +337,11 @@ export default function GsapPracticeOne() {
         paused: true,
       });
 
-      return [enterTwo, leaveTwo];
+      return [enterThree, leaveThree];
     }
+    const [enterThree, leaveThree] = page03();
 
-    const [enterTwo, leaveTwo] = page02();
-
-    // page02()[0].play();
-    enterTwo?.play();
-    //   page3
+    enterThree?.play();
   }, []);
 
   return (
@@ -272,7 +402,7 @@ export default function GsapPracticeOne() {
 
         {/* 페이지 2 */}
 
-        <section id="page02" className="section" ref={twoRefs[0]}>
+        {/* <section id="page02" className="section" ref={twoRefs[0]}>
           <div className="bg" ref={twoRefs[1]}></div>
           <div className="floor" ref={twoRefs[2]}>
             <img src="/assets/images/page02/bg_02.png" alt="바닥" />
@@ -292,14 +422,14 @@ export default function GsapPracticeOne() {
               <img src="/assets/images/page02/forky.png" alt="포키" />
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* 페이지 3 */}
 
-        {/* <section id="page03" className="section">
-          <div className="bg"></div>
+        <section id="page03" className="section" ref={threeRefs[0]}>
+          <div className="bg" ref={threeRefs[1]}></div>
 
-          <div className="toy">
+          <div className="toy" ref={threeRefs[2]}>
             <div>
               <img src="/assets/images/page03/toy_01.png" alt="장난감1" />
             </div>
@@ -311,12 +441,12 @@ export default function GsapPracticeOne() {
             </div>
             <div>
               <img src="/assets/images/page03/toy_04.png" alt="장난감1" />
-              <div className="forky">
+              <div className="forky" ref={threeRefs[3]}>
                 <img src="/assets/images/page03/forky.png" alt="포키" />
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
       </div>
     </Wrapper>
   );
