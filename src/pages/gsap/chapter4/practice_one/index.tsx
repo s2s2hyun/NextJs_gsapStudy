@@ -8,6 +8,17 @@ import { SplitText } from "@/util/plugin/splitText";
 import { delimiter } from "path";
 gsap.registerPlugin(TextPlugin); // TextPlugin을 등록합니다.
 export default function GsapPracticeOne() {
+  const [title, setTitle] = useState<string[]>([
+    "TOYSTORY I",
+    "TOYSTORY II",
+    "TOYSTORY III",
+  ]);
+  const [subTitle, setSubTitle] = useState<string[]>([
+    "토이스토리 시즌 1",
+    "토이스토리 시즌 2",
+    "토이스토리 시즌 3",
+  ]);
+
   const refs = [
     useRef<HTMLDivElement>(null), // page01Ref
     useRef<HTMLDivElement>(null), // page01BgRef
