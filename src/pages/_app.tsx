@@ -19,9 +19,8 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* <ThemeProvider theme={theme}> */}
         <PageTransition>
           <MuiThemeProvider>
-            {router.pathname !== "/gsap/chapter4/practice_one" && (
-              <LayoutHeader />
-            )}
+            {router.pathname !== "/gsap/chapter4/practice_one" &&
+              router.pathname !== "/boardWrite" && <LayoutHeader />}
 
             <Component {...pageProps} />
             <LayoutFooter />

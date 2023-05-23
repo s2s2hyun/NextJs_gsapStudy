@@ -78,6 +78,8 @@ export default function BoardDetailPage() {
     }
   };
 
+  console.log(board);
+
   return (
     <section
       className={classes.customBackground}
@@ -125,8 +127,12 @@ export default function BoardDetailPage() {
         <>
           {board ? (
             <div>
-              <h2 className={classes.customText}>{board.title}</h2>
-              <p className={classes.customText}>{board.description}</p>
+              <h2
+                className={classes.customText}
+                dangerouslySetInnerHTML={{ __html: board.title }}></h2>
+              <p
+                className={classes.customText}
+                dangerouslySetInnerHTML={{ __html: board.description }}></p>
             </div>
           ) : (
             <div>Loading...</div>

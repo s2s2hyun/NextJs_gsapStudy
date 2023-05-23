@@ -49,249 +49,255 @@ export default function GsapPracticeOne() {
   ];
 
   useEffect(() => {
-    // function page01() {
-    //   const page = "page01";
-    //   let enterone: gsap.core.Timeline | undefined;
-    //   let leaveone: gsap.core.Timeline | undefined;
+    gsap.set("section", {
+      opacity: 0,
+      zIndex: gsap.utils.distribute({
+        base: 1,
+        amount: 10,
+        from: "end",
+      }),
+    });
 
-    //   if (refs[7] && refs[7].current) {
-    //     enterone = gsap
-    //       .timeline({
-    //         defaults: {
-    //           duration: 1,
-    //           opacity: 0,
-    //         },
-    //         paused: true,
-    //       })
-    //       .to(refs[0].current, {
-    //         opacity: 1,
-    //       })
-    //       .fromTo(
-    //         refs[1].current,
-    //         { scale: 2, opacity: 0 },
-    //         {
-    //           scale: 1,
-    //           opacity: 1,
-    //         },
-    //         "<"
-    //       )
-    //       .fromTo(
-    //         refs[2].current,
-    //         { y: 0 },
-    //         {
-    //           y: 30,
-    //           opacity: 1,
-    //         },
-    //         "-=0.2"
-    //       )
-    //       .fromTo(
-    //         refs[3].current,
-    //         { y: 0 },
-    //         {
-    //           y: 30,
-    //           opacity: 1,
-    //         },
-    //         "-=0.2"
-    //       )
-    //       .fromTo(refs[4].current, { x: 0 }, { x: -30, opacity: 1 }, "<")
-    //       .fromTo(refs[5].current, { x: 0 }, { x: -30, opacity: 1 }, "-=0.5")
-    //       .fromTo(refs[6].current, { x: 0 }, { x: -30, opacity: 1 }, "-=0.5")
-    //       .fromTo(
-    //         refs[7].current.children,
-    //         { y: 300 },
-    //         {
-    //           duration: 0.1,
-    //           y: 0,
-    //           stagger: 0.5,
-    //           opacity: 1,
-    //         },
-    //         "-=0.5"
-    //       );
+    function page01() {
+      const page = "page01";
+      let enterOne: gsap.core.Timeline | undefined;
+      let leaveOne: gsap.core.Timeline | undefined;
 
-    //     leaveone = gsap
-    //       .timeline({
-    //         defaults: {
-    //           duration: 1,
-    //           opacity: 0,
-    //         },
-    //         paused: true,
-    //       })
-    //       .to(refs[7].current.children, {
-    //         duration: 0.5,
-    //         y: 250,
-    //         stagger: 0.05,
-    //       })
-    //       .to(
-    //         refs[2].current,
-    //         {
-    //           duration: 0.5,
-    //           y: 900,
-    //         },
-    //         "-=0.2"
-    //       )
-    //       .to(
-    //         refs[3].current,
-    //         {
-    //           duration: 0.5,
-    //           y: 900,
-    //         },
-    //         "-=0.2"
-    //       )
-    //       .to(
-    //         refs[4].current,
-    //         {
-    //           duration: 0.8,
-    //           x: -1200,
-    //         },
-    //         "<"
-    //       )
-    //       .to(
-    //         refs[5].current,
-    //         {
-    //           duration: 0.7,
-    //           x: -900,
-    //         },
-    //         "-=0.5"
-    //       )
-    //       .to(
-    //         refs[6].current,
-    //         {
-    //           duration: 0.9,
-    //           x: -1000,
-    //         },
-    //         "<"
-    //       )
-    //       .to(
-    //         refs[1].current,
-    //         {
-    //           duration: 2,
-    //           scale: 2,
-    //           opacity: 1,
-    //         },
-    //         "<"
-    //       )
-    //       .to(refs[0].current, { opacity: 0 }, "-=0.3");
-    //   }
+      if (refs[7] && refs[7].current) {
+        enterOne = gsap
+          .timeline({
+            defaults: {
+              duration: 1,
+              opacity: 0,
+            },
+            paused: true,
+          })
+          .to(refs[0].current, {
+            opacity: 1,
+          })
+          .fromTo(
+            refs[1].current,
+            { scale: 2, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+            },
+            "<"
+          )
+          .fromTo(
+            refs[2].current,
+            { y: 0 },
+            {
+              y: 30,
+              opacity: 1,
+            },
+            "-=0.2"
+          )
+          .fromTo(
+            refs[3].current,
+            { y: 0 },
+            {
+              y: 30,
+              opacity: 1,
+            },
+            "-=0.2"
+          )
+          .fromTo(refs[4].current, { x: 0 }, { x: -30, opacity: 1 }, "<")
+          .fromTo(refs[5].current, { x: 0 }, { x: -30, opacity: 1 }, "-=0.5")
+          .fromTo(refs[6].current, { x: 0 }, { x: -30, opacity: 1 }, "-=0.5")
+          .fromTo(
+            refs[7].current.children,
+            { y: 300 },
+            {
+              duration: 0.1,
+              y: 0,
+              stagger: 0.5,
+              opacity: 1,
+            },
+            "-=0.5"
+          );
 
-    //   return [enterone, leaveone];
-    // }
+        leaveOne = gsap
+          .timeline({
+            defaults: {
+              duration: 0.5,
+              opacity: 0,
+            },
+            paused: true,
+          })
+          .to(refs[7].current.children, {
+            duration: 0.5,
+            y: 250,
+            stagger: 0.05,
+          })
+          .to(
+            refs[2].current,
+            {
+              duration: 0.5,
+              y: 900,
+            },
+            "-=0.2"
+          )
+          .to(
+            refs[3].current,
+            {
+              duration: 0.5,
+              y: 900,
+            },
+            "-=0.2"
+          )
+          .to(
+            refs[4].current,
+            {
+              duration: 0.8,
+              x: -1200,
+            },
+            "<"
+          )
+          .to(
+            refs[5].current,
+            {
+              duration: 0.7,
+              x: -900,
+            },
+            "-=0.5"
+          )
+          .to(
+            refs[6].current,
+            {
+              duration: 0.9,
+              x: -1000,
+            },
+            "<"
+          )
+          .to(
+            refs[1].current,
+            {
+              duration: 2,
+              scale: 2,
+              opacity: 1,
+            },
+            "<"
+          )
+          .to(refs[0].current, { opacity: 0 }, "-=0.3");
+      }
 
-    // const [enterone, leaveone] = page01();
+      return [enterOne, leaveOne];
+    }
+
+    const [enterOne, leaveOne] = page01();
 
     // Use `enter` and `leave` variables as needed
-    // window.addEventListener("load", () => {
-    //   enter?.play();
-    // });
 
     // leave?.play();
     // page01()[0]?.play();
 
     // page2
-    // function page02() {
-    //   const page = "#page02";
-    //   let enterTwo: gsap.core.Timeline | undefined;
-    //   let leaveTwo: gsap.core.Timeline | undefined;
+    function page02() {
+      const page = "#page02";
+      let enterTwo: gsap.core.Timeline | undefined;
+      let leaveTwo: gsap.core.Timeline | undefined;
 
-    //   enterTwo = gsap
-    //     .timeline({
-    //       defaults: {
-    //         duration: 1,
-    //         opacity: 0,
-    //       },
-    //       paused: true,
-    //     })
-    //     .fromTo(
-    //       twoRefs[0].current,
-    //       { opacity: 0 },
-    //       {
-    //         opacity: 1,
-    //       }
-    //     )
-    //     .fromTo(
-    //       twoRefs[2].current,
-    //       {
-    //         y: 50,
-    //         opacity: 0,
-    //       },
-    //       { y: 0, opacity: 1 },
-    //       "<"
-    //     )
-    //     .fromTo(
-    //       twoRefs[3].current,
-    //       { opacity: 0, y: 0 },
-    //       { y: -50, opacity: 1 },
-    //       "<"
-    //     )
-    //     .fromTo(
-    //       twoRefs[4].current,
-    //       { opacity: 0, x: -50 },
-    //       { x: 0, opacity: 1 },
-    //       "<"
-    //     )
-    //     .fromTo(
-    //       twoRefs[6].current,
-    //       {
-    //         opacity: 0,
-    //         y: 30,
-    //       },
-    //       {
-    //         opacity: 1,
-    //         y: 0,
-    //       }
-    //     )
-    //     .fromTo(
-    //       twoRefs[7].current,
-    //       {
-    //         opacity: 0,
-    //         y: 30,
-    //       },
-    //       {
-    //         opacity: 1,
-    //         y: 0,
-    //       },
-    //       "-=0.5"
-    //     );
+      enterTwo = gsap
+        .timeline({
+          defaults: {
+            duration: 1,
+            opacity: 0,
+          },
+          paused: true,
+        })
+        .fromTo(
+          twoRefs[0].current,
+          { opacity: 0 },
+          {
+            opacity: 1,
+          }
+        )
+        .fromTo(
+          twoRefs[2].current,
+          {
+            y: 50,
+            opacity: 0,
+          },
+          { y: 0, opacity: 1 },
+          "<"
+        )
+        .fromTo(
+          twoRefs[3].current,
+          { opacity: 0, y: 0 },
+          { y: -50, opacity: 1 },
+          "<"
+        )
+        .fromTo(
+          twoRefs[4].current,
+          { opacity: 0, x: -50 },
+          { x: 0, opacity: 1 },
+          "<"
+        )
+        .fromTo(
+          twoRefs[6].current,
+          {
+            opacity: 0,
+            y: 30,
+          },
+          {
+            opacity: 1,
+            y: 0,
+          }
+        )
+        .fromTo(
+          twoRefs[7].current,
+          {
+            opacity: 0,
+            y: 30,
+          },
+          {
+            opacity: 1,
+            y: 0,
+          },
+          "-=0.5"
+        );
 
-    //   leaveTwo = gsap
-    //     .timeline({
-    //       defaults: {
-    //         duration: 1,
-    //         opacity: 0,
-    //       },
-    //       paused: true,
-    //     })
-    //     .to(twoRefs[6].current, {
-    //       y: 30,
-    //       opacity: 0,
-    //     })
-    //     .to(
-    //       twoRefs[7].current,
-    //       {
-    //         y: 30,
-    //         opacity: 0,
-    //       },
-    //       "-=0.5"
-    //     )
-    //     .to(twoRefs[2], {
-    //       y: 50,
-    //       opacity: 0,
-    //     })
-    //     .to(twoRefs[3].current, { x: -50, opacity: 0 }, "<")
-    //     .to(twoRefs[4].current, { x: 50, opacity: 0 }, "<")
-    //     .to(twoRefs[1].current, { opacity: 0 }, "<")
-    //     .to(
-    //       twoRefs[0].current,
-    //       {
-    //         opacity: 0,
-    //         duration: 1,
-    //       },
-    //       "<"
-    //     );
+      leaveTwo = gsap
+        .timeline({
+          defaults: {
+            duration: 1,
+            opacity: 0,
+          },
+          paused: true,
+        })
+        .to(twoRefs[6].current, {
+          y: 30,
+          opacity: 0,
+        })
+        .to(
+          twoRefs[7].current,
+          {
+            y: 30,
+            opacity: 0,
+          },
+          "-=0.5"
+        )
+        .to(twoRefs[2], {
+          y: 50,
+          opacity: 0,
+        })
+        .to(twoRefs[3].current, { x: -50, opacity: 0 }, "<")
+        .to(twoRefs[4].current, { x: 50, opacity: 0 }, "<")
+        .to(twoRefs[1].current, { opacity: 0 }, "<")
+        .to(
+          twoRefs[0].current,
+          {
+            opacity: 0,
+            duration: 1,
+          },
+          "<"
+        );
 
-    //   return [enterTwo, leaveTwo];
-    // }
+      return [enterTwo, leaveTwo];
+    }
 
-    // const [enterTwo, leaveTwo] = page02();
+    const [enterTwo, leaveTwo] = page02();
 
     //   page3
     function page03() {
@@ -306,6 +312,9 @@ export default function GsapPracticeOne() {
               opacity: 0,
             },
             paused: true,
+          })
+          .set(threeRefs[2].current.children, {
+            transformPerspective: 1500,
           })
           .fromTo(
             threeRefs[0].current,
@@ -327,32 +336,163 @@ export default function GsapPracticeOne() {
             threeRefs[2].current.children,
             {
               opacity: 0,
-              scale: 0.5,
+              scale: 0.7,
             },
             {
               stagger: {
                 each: 0.1,
+                from: "edges",
               },
               opacity: 1,
+              ease: "back(1).inOut",
               y: 100,
               z: 500,
+              x: gsap.utils.distribute({
+                base: -100,
+                amount: 100,
+              }),
             }
           );
       }
 
-      leaveThree = gsap.timeline({
-        defaults: {
-          duration: 1,
-          opacity: 0,
-        },
-        paused: true,
-      });
+      if (threeRefs[2] && threeRefs[2].current) {
+        leaveThree = gsap
+          .timeline({
+            defaults: {
+              duration: 1,
+            },
+            paused: true,
+          })
+          .to(
+            threeRefs[2].current.children,
+
+            {
+              stagger: {
+                each: 0.1,
+                from: "center",
+              },
+              opacity: 1,
+              ease: "back(1).inOut",
+              y: 1000,
+              z: 1000,
+              x: gsap.utils.distribute({
+                base: -100,
+                amount: 100,
+              }),
+            }
+          )
+          .to(
+            threeRefs[1].current,
+
+            { scale: 1.5, opacity: 1 },
+            "<"
+          )
+          .to(threeRefs[0].current, { opacity: 0 }, "-=0.5");
+      }
 
       return [enterThree, leaveThree];
     }
     const [enterThree, leaveThree] = page03();
 
-    enterThree?.play();
+    function title() {
+      const enterTitle = gsap
+        .timeline({
+          defaults: {
+            opacity: 0,
+            y: 50,
+          },
+          paused: true,
+        })
+        .fromTo(".title > h1", { opacity: 0, y: 50 }, { y: 0, opacity: 1 })
+        .fromTo(
+          ".title > p",
+          { opacity: 0, y: 50 },
+          { y: 0, opacity: 1 },
+          "-=0.3"
+        )
+        .fromTo(
+          ".title > button",
+          { opacity: 0, y: 50 },
+          { y: 0, opacity: 1 },
+          "-=0.3"
+        );
+
+      const leaveTitle = gsap
+        .timeline({
+          defaults: {
+            duration: 0.3,
+            opacity: 0,
+            y: 50,
+          },
+          paused: true,
+        })
+        .to(".title > h1", {}, "-=0.3")
+        .to(".title > p", {}, "-=0.3")
+        .to(".title > button", {});
+
+      return [enterTitle, leaveTitle];
+    }
+    const [enterTitle, leaveTitle] = title();
+
+    // title()[1].play();
+    const enter = [enterOne, enterTwo, enterThree];
+    const leave = [leaveOne, leaveTwo, leaveThree];
+    const navList = Array.from(
+      document.querySelectorAll("li")
+    ) as HTMLElement[];
+
+    let current = 0;
+    let next = 0;
+    let playing = true;
+
+    navList.forEach((li, index) => {
+      const roma = ["I", "II", "III"];
+
+      const arabic = ["1", "2", "3"];
+
+      li.addEventListener("click", () => {
+        if (!playing) {
+          next = index;
+
+          if (li.classList.contains("active")) return;
+
+          for (let i = 0; i < navList.length; i++) {
+            navList[i].classList.remove("active");
+          }
+
+          li.classList.add("active");
+
+          if (enterOne && leave && enter && leaveOne) {
+            const tl = gsap
+              .timeline()
+              .add(leave[current]?.play() as gsap.core.Animation)
+              .add(leaveTitle.play(), "-=1")
+              .set(".title > h1", { text: `toystory ${roma[index]}` })
+              .set(
+                ".title > p",
+                { text: `토이스토리 시즌 ${arabic[index]}` },
+                "<"
+              )
+              .add(enter[next]?.play() as gsap.core.Animation)
+              .add(enterTitle.play());
+
+            tl.eventCallback("onComplete", () => {
+              current = next;
+              playing = false;
+            });
+          }
+        }
+        playing = true;
+      });
+    });
+
+    if (enterOne && leaveOne) {
+      const tl = gsap.timeline().add(enterOne.play()).add(enterTitle.play());
+
+      tl.eventCallback("onComplete", () => {
+        playing = false;
+      });
+    }
   }, []);
 
   return (
@@ -380,7 +520,7 @@ export default function GsapPracticeOne() {
 
         {/* 페이지 1 */}
 
-        {/* <section id="page01" className="section" ref={refs[0]}>
+        <section id="page01" className="section" ref={refs[0]}>
           <div className="bg" ref={refs[1]}></div>
           <div className="woody" ref={refs[2]}>
             <img src="/assets/images/page01/woody.png" alt="우디" />
@@ -409,11 +549,11 @@ export default function GsapPracticeOne() {
               <img src="/assets/images/page01/toy_04.png" alt="외계인 장난감" />
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* 페이지 2 */}
 
-        {/* <section id="page02" className="section" ref={twoRefs[0]}>
+        <section id="page02" className="section" ref={twoRefs[0]}>
           <div className="bg" ref={twoRefs[1]}></div>
           <div className="floor" ref={twoRefs[2]}>
             <img src="/assets/images/page02/bg_02.png" alt="바닥" />
@@ -433,7 +573,7 @@ export default function GsapPracticeOne() {
               <img src="/assets/images/page02/forky.png" alt="포키" />
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* 페이지 3 */}
 
