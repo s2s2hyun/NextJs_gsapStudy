@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 const Editor = dynamic(() => import("@/comons/Editor/Editor"), {
   ssr: false,
+  loading: () => <p>Loading ...</p>,
 });
 // import Editor from "@/comons/Editor/Editor";
 
@@ -26,21 +27,48 @@ export default function BoardWrite() {
   const [address, setAddress] = useState("");
   const router = useRouter();
 
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+
+  //   formData.append("title", title);
+  //   formData.append("description", description);
+
+  //   // Log the contents of formData
+  //   for (let pair of formData.entries()) {
+  //     console.log(pair[0] + ", " + pair[1]);
+  //   }
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:8080/boards",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+
+  //     console.log(response.data);
+
+  //     // After writing a post, go directly to the detail of the post you wrote
+  //     const postId = response.data.id;
+  //     router.push(`/board/${postId}`);
+  //     // Redirect to the main page or any other page after successful creation
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
+
     try {
-      const response = await axios.post(
-        "http://localhost:8080/boards",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("http://localhost:8080/boards", {
+        title,
+        description,
+      });
 
       console.log(response.data);
 

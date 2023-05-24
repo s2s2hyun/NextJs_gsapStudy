@@ -99,10 +99,13 @@ export default function BoardDetailPage() {
           top: "3rem",
           left: "2rem",
           cursor: "pointer",
+          zIndex: "100",
         }}
         onClick={() => router.push("/")}
       />
-      <h1 className={classes.customText}>게시글 </h1>
+      <h1 className={classes.customText} onClick={() => router.push("/")}>
+        게시글{" "}
+      </h1>
       {isEditing ? (
         <>
           <form
