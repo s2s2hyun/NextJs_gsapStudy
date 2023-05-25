@@ -1,4 +1,7 @@
+// @ts-nocheck
 import React, {
+  ChangeEvent,
+  MutableRefObject,
   useCallback,
   useEffect,
   useMemo,
@@ -9,8 +12,21 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import styled from "@emotion/styled";
 import axios from "axios";
-import Quill, { RangeStatic } from "quill";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import Quill from "quill";
+
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill");
+
+    // eslint-disable-next-line react/display-name
+    return ({ forwardedRef, ...props }: any) => (
+      <RQ ref={forwardedRef} {...props} />
+    );
+  },
+  {
+    ssr: false,
+  }
+);
 
 interface EditorProps {
   description: string;
@@ -19,102 +35,125 @@ interface EditorProps {
 
 export const Editor = React.memo(
   ({ description, setDescription }: EditorProps) => {
-    const editorInstance = useRef<Quill | null>(null);
-    const [editorValue, setEditorValue] = useState<string>(description);
-    const [ignoreChange, setIgnoreChange] = useState<boolean>(false);
-    const quillRef = useRef<any>(null);
+    const quillRef = useRef<MutableRefObject<null>>(null);
+    // const [editorValue, setEditorValue] = useState<string>(description);
 
     const imageHandler = useCallback(async () => {
-      try {
-        const fileInput = document.createElement("input");
-        fileInput.setAttribute("type", "file");
-        fileInput.setAttribute("accept", "image/*");
+      const fileInput = document.createElement("input");
+      fileInput.setAttribute("type", "file");
+      fileInput.setAttribute("accept", "image/*");
+      fileInput.click();
 
-        await new Promise((resolve) => {
-          fileInput.addEventListener("change", (e) => resolve(e));
-          fileInput.click();
-        });
-
+      fileInput.addEventListener("change", async (e) => {
         const file = fileInput.files[0];
-        console.log(file, "파일");
+        if (!file) return;
 
         const formData = new FormData();
         formData.append("image", file);
 
-        const response = await axios.post(
-          "http://localhost:8080/boards/upload",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-
-        const imageUrl = "http://localhost:8080" + response.data.imageUrl;
-        console.log(imageUrl, "imageUrl");
-        console.log(editorInstance.current, "editorInstance.current");
-        if (editorInstance.current) {
-          const range = editorInstance.current.getSelection(true);
-          console.log(range, "range get()");
-          editorInstance.current.insertEmbed(
-            range?.index + 1 || 0,
-            "image",
-            imageUrl
+        try {
+          const response = await axios.post(
+            "http://localhost:8080/boards/upload",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
           );
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }, []);
 
-    useEffect(() => {
-      if (quillRef.current && quillRef.current.editor) {
-        editorInstance.current = quillRef.current.editor;
-      }
+          console.log(response.data);
+          const imageUrl = "http://localhost:8080" + response.data.imageUrl;
+          console.log(imageUrl);
+          const range = quillRef.current?.getEditor().getSelection()?.index;
+
+          if (range !== null && range !== undefined) {
+            const quill = quillRef.current?.getEditor();
+            quill?.setSelection(range, 1);
+            quill?.clipboard.dangerouslyPasteHTML(
+              range,
+              `<img src="${imageUrl}"/>` // assuming response.data.url is the URL of the uploaded image
+            );
+          }
+        } catch (error: any) {
+          alert(error.message);
+        }
+      });
     }, []);
 
     const handleChange = (value: string) => {
-      setEditorValue(value);
       setDescription(value);
     };
 
-    const modulesWithImageHandler = useMemo(
-      () => ({
-        toolbar: {
-          container: [
-            ["bold", "italic", "underline", "strike", "blockquote"],
-            [{ size: ["small", false, "large", "huge"] }, { color: [] }],
-            [
-              { list: "ordered" },
-              { list: "bullet" },
-              { indent: "-1" },
-              { indent: "+1" },
-              { align: [] },
-            ],
-            [
-              // "image",
-              "video",
-            ],
+    // useEffect(() => {
+    //   if (!quillRef.current || !quillRef.current?.current) return;
+
+    //   const quill = new Quill(quillRef.current.current, {
+    //     theme: "snow",
+    //     modules: {
+    //       toolbar: [
+    //         ["bold", "italic", "underline", "strike"],
+    //         [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    //         [{ size: ["small", false, "large", "huge"] }],
+    //         [{ color: [] }, { background: [] }],
+    //         ["link", "image"],
+    //         ["clean"],
+    //       ],
+    //       ko: true,
+    //     },
+    //   });
+
+    //   const quillInstance = quillRef.current.current.getEditor();
+
+    //   if (quillInstance) {
+    //     quillInstance.on("text-change", () => {
+    //       const html = quillInstance.root.innerHTML.trim();
+    //       setDescription(html);
+    //     });
+
+    //     // 컨텐츠 설정
+    //     if (description) {
+    //       quillInstance.root.innerHTML = description;
+    //     }
+    //   }
+
+    //   return () => {
+    //     if (quillInstance) {
+    //       quillInstance.off("text-change");
+    //       quillInstance.destroy();
+    //     }
+    //   };
+    // }, [description, setDescription]);
+
+    const modulesWithImageHandler = {
+      toolbar: {
+        container: [
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [{ size: ["small", false, "large", "huge"] }, { color: [] }],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+            { align: [] },
           ],
-          handlers: {
-            // 위에서 만든 이미지 핸들러 사용하도록 설정
-            image: imageHandler,
-          },
+          ["image", "video", "link"],
+        ],
+        handlers: {
+          image: imageHandler,
         },
-      }),
-      [imageHandler]
-    );
+      },
+    };
 
     return (
       <Wrapper>
         <ReactQuill
           theme="snow"
-          value={editorValue}
+          value={description}
           onChange={handleChange}
           placeholder={"Write something awesome..."}
           modules={modulesWithImageHandler}
-          ref={quillRef}
+          forwardedRef={quillRef}
         />
       </Wrapper>
     );
@@ -128,8 +167,5 @@ const Wrapper = styled.div`
   margin: 0 auto;
   .ql-editor {
     min-height: 400px;
-  }
-  .ql-toolbar.ql-snow:nth-of-type(1) {
-    display: none;
   }
 `;

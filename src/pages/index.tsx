@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import { gsap } from "gsap";
 //@ts-ignore
 import { SplitText } from "@/util/plugin/splitText";
+import SecondIndex from "@/components/Main/SecondIndex";
 
 interface EffectConfig {
   y?: number;
@@ -50,44 +51,12 @@ const CustomBackground = styled("div")(({ theme }) => ({
   flexDirection: "column",
 }));
 
-const LayHeaderCustomBackground = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  position: "absolute",
-}));
-
 const InnerContainer = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-}));
-
-const BoradTitle = styled("h3")(({ theme }) => ({
-  fontSize: "24px",
-
-  color: theme.palette.text.primary,
-}));
-
-const BoradInfo = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const BoardListNumberText = styled("p")(({ theme }) => ({
-  color: theme.palette.text.primary,
-  fontSize: "14px",
-  // textAlign:"center",
-  cursor: "pointer",
 }));
 
 export default function Home() {
@@ -216,7 +185,6 @@ export default function Home() {
         </div>
         <Container maxWidth="xl">
           <InnerContainer>
-            {/* <h1 style={{ position: "relative", color: "white" }}>hi</h1> */}
             <WordDiv>
               <div className="word">
                 <div className="ex1" data-index="1" ref={firstText}>
@@ -236,6 +204,7 @@ export default function Home() {
           </InnerContainer>
         </Container>
       </CustomBackground>
+      <SecondIndex />
     </>
   );
 }
@@ -260,6 +229,7 @@ export default function Home() {
 
 const WordDiv = styled("div")`
   position: "relative";
+  z-index: 10;
   .word {
     color: #fff;
     font-size: 6.25rem;
@@ -270,7 +240,6 @@ const WordDiv = styled("div")`
   .word > div {
     position: absolute;
     left: 50%;
-    top: 50%;
     transform: translate(-50%, -50%);
   }
 
