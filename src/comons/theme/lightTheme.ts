@@ -27,7 +27,7 @@ declare module "@mui/material/styles" {
 
 const baseTheme = createTheme();
 
-export const lightTheme: Theme = {
+export const lightTheme: CustomTheme = {
   ...baseTheme,
   palette: {
     ...baseTheme.palette,
@@ -42,6 +42,12 @@ export const lightTheme: Theme = {
       default: "#ffffff",
       paper: "#f0f0f0",
     },
+    appBarBackground: {
+      default: "#212C92",
+    },
+    modalBackground: {
+      default: "#212C92",
+    },
     text: {
       primary: "#333333",
       secondary: "#BDBDBD",
@@ -50,7 +56,7 @@ export const lightTheme: Theme = {
   },
   typography: {
     ...baseTheme.typography,
-    fontFamily: "NotoSans",
+    fontFamily: "Poppins",
     fontSize: 16,
     h2: {
       color: "#BDBDBD",
@@ -88,8 +94,8 @@ export const lightTheme: Theme = {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: "unset",
-          backgroundImage: "none",
+          backgroundColor: "blue",
+          // backgroundImage: "none",
           backdropFilter: "blur(5px)",
         },
       },

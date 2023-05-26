@@ -14,6 +14,7 @@ const GlobalStyles = () => (
       body {
         margin: 0;
         font-family: "Poppins", Sans-serif;
+        overflow-x: hidden;
       }
     `}
   />

@@ -19,9 +19,27 @@ export const darkTheme = createTheme({
       default: "#333333",
       paper: "#181818",
     },
+    appBarBackground: {
+      default: "#000",
+    },
+    modalBackground: {
+      default: "#000",
+    },
     text: {
       primary: "#ffffff",
       secondary: "#BDBDBD",
+    },
+  },
+  components: {
+    ...lightTheme.components,
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "yellow", // AppBar background will be yellow for dark mode
+          backgroundImage: "none",
+          backdropFilter: "blur(5px)",
+        },
+      },
     },
   },
   custom: {

@@ -21,7 +21,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <MuiThemeProvider>
             {router.pathname !== "/gsap/chapter4/practice_one" &&
               router.pathname !== "/boardWrite" && <LayoutHeader />}
-
             <Component {...pageProps} />
             <LayoutFooter />
           </MuiThemeProvider>

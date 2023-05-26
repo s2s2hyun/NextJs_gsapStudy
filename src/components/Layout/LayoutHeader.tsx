@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,25 +8,28 @@ import { keyframes } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
 import styled from "@emotion/styled";
 import { Theme } from "@mui/material/styles";
+import HeaderModal from "../Modal/HeaderModal";
+import { useRouter } from "next/router";
 
 interface StyledButtonProps extends ButtonProps {
   isClicked?: boolean;
+  isBoardPage?: string;
 }
 
 const StyledBox = styled(Box)(({ theme }) => ({
   flexGrow: 1,
-
-  //   backgroundColor: theme.palette.background.default,
+  // backgroundColor: theme.palette.background.default,
   backdropFilter: "none",
   boxShadow: "none",
 }));
 
 const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
+  position: "fixed",
   backdropFilter: "none",
   justifyContent: "center",
   boxShadow: "none",
   minHeight: "150px",
-
+  backgroundColor: "var(--backgroundColor)",
   paddingLeft: theme.spacing(9),
   paddingRight: theme.spacing(9),
 
@@ -73,9 +76,16 @@ const rotateTwoAnimation = keyframes`
   }
 `;
 
-const StyledButton = styled(({ isClicked, ...rest }: StyledButtonProps) => (
-  <Button {...rest} />
-))<StyledButtonProps>(({ theme, isClicked }) => ({
+const waveAnimation = keyframes`
+  0% { background-position: 0 0; }
+  100% { background-position: -9999px 0; }
+`;
+
+const StyledButton = styled(
+  ({ isBoardPage, isClicked, ...rest }: StyledButtonProps) => (
+    <Button {...rest} />
+  )
+)<StyledButtonProps>(({ theme, isClicked, isBoardPage }) => ({
   margin: "0",
   padding: "0",
   border: "0",
@@ -89,7 +99,7 @@ const StyledButton = styled(({ isClicked, ...rest }: StyledButtonProps) => (
   "& span": {
     position: "absolute",
     left: 0,
-    width: "10%",
+    width: "40px",
     height: "3px",
     backgroundColor: "#fff",
     borderRadius: "1.5px",
@@ -110,50 +120,82 @@ const StyledButton = styled(({ isClicked, ...rest }: StyledButtonProps) => (
 
 export default function LayoutHeader() {
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const theme: Theme = useTheme();
+
+  const ModalHandler = () => {
+    setIsClicked(!isClicked);
+  };
+
+  useEffect(() => {
+    const updateScrollPosition = () => {
+      setScrollPosition(
+        window.pageYOffset || document.documentElement.scrollTop
+      );
+    };
+
+    window.addEventListener("scroll", updateScrollPosition);
+
+    return () => window.removeEventListener("scroll", updateScrollPosition);
+  }, []);
+  // HeaderModal
+
+  const router = useRouter();
+  const isBoardPage = router.pathname === "/board";
   return (
-    <StyledBox>
-      <StyledAppBar position="absolute" theme={theme}>
-        <Toolbar>
-          <StyledButton
-            type="button"
-            sx={{ flexGrow: 1 }}
-            onClick={() => setIsClicked(!isClicked)}
-            isClicked={isClicked}
-            disableRipple>
-            <span className="span_color1"></span>
-            <span className="span_color2"></span>
-            <span className="span_color3"></span>
-          </StyledButton>
-          <Typography
-            variant="h4"
-            component="div"
-            style={{
-              color: "#fff",
-              textAlign: "center",
-              fontFamily: "Poppins, Sans-serif",
-              fontWeight: "600",
-            }}
-            sx={{ flexGrow: 1 }}>
-            PPRK
-          </Typography>
-          <Typography
-            variant="h4"
-            component="div"
-            style={{
-              color: "#fff",
-              textAlign: "center",
-              fontFamily: "Poppins, Sans-serif",
-              fontWeight: "600",
-            }}
-            sx={{ flexGrow: 1 }}>
-            한국어
-          </Typography>
-          {/* <Button color="inherit" style={{ color: "#fff" }}>
-            Login
-          </Button> */}
-        </Toolbar>
-      </StyledAppBar>
-    </StyledBox>
+    <>
+      {isClicked ? (
+        <HeaderModal isClicked={isClicked} setIsClicked={setIsClicked} />
+      ) : null}
+      <StyledBox
+        style={
+          {
+            "--backgroundColor":
+              scrollPosition < 1000
+                ? "unset"
+                : theme.palette.appBarBackground.default,
+          } as React.CSSProperties
+        }>
+        <StyledAppBar position={isBoardPage ? "static" : "fixed"} theme={theme}>
+          <Toolbar>
+            <StyledButton
+              type="button"
+              sx={{ flexGrow: 1 }}
+              onClick={ModalHandler}
+              isClicked={isClicked}
+              isBoardPage={isBoardPage}
+              disableRipple>
+              <span className="span_color1"></span>
+              <span className="span_color2"></span>
+              <span className="span_color3"></span>
+            </StyledButton>
+            <Typography
+              variant="h4"
+              component="div"
+              style={{
+                color: isBoardPage ? "red" : "blue",
+                textAlign: "center",
+                fontFamily: "Poppins, Sans-serif",
+                fontWeight: "600",
+              }}
+              sx={{ flexGrow: 1 }}>
+              PPRK
+            </Typography>
+            <Typography
+              variant="h4"
+              component="div"
+              style={{
+                color: isBoardPage ? "red" : "blue",
+                textAlign: "center",
+                fontFamily: "Poppins, Sans-serif",
+                fontWeight: "600",
+              }}
+              sx={{ flexGrow: 1 }}>
+              한국어
+            </Typography>
+          </Toolbar>
+        </StyledAppBar>
+      </StyledBox>
+    </>
   );
 }
