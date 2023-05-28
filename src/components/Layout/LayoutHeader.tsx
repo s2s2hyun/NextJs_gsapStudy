@@ -10,10 +10,14 @@ import styled from "@emotion/styled";
 import { Theme } from "@mui/material/styles";
 import HeaderModal from "../Modal/HeaderModal";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { closeModal, openModal } from "@/store/feature/modalSlice";
 
 interface StyledButtonProps extends ButtonProps {
   isClicked?: boolean;
-  isBoardPage?: string;
+  isBoardPage?: boolean;
+  isOpen?: boolean;
 }
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -26,29 +30,30 @@ const StyledBox = styled(Box)(({ theme }) => ({
 const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
   position: "fixed",
   backdropFilter: "none",
-  justifyContent: "center",
+  justifyContent: "flex-start",
   boxShadow: "none",
-  minHeight: "150px",
+  zIndex: "16",
+  // minHeight: "150px",
   backgroundColor: "var(--backgroundColor)",
-  paddingLeft: theme.spacing(9),
-  paddingRight: theme.spacing(9),
+  paddingLeft: theme.spacing(10),
+  paddingRight: theme.spacing(10),
 
   [theme.breakpoints.down("sm")]: {
     paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
-    minHeight: "100px",
+    // minHeight: "100px",
   },
 
   [theme.breakpoints.between("sm", "lg")]: {
     paddingLeft: theme.spacing(6),
     paddingRight: theme.spacing(6),
-    minHeight: "120px",
+    // minHeight: "120px",
   },
 
   [theme.breakpoints.up("lg")]: {
     paddingLeft: theme.spacing(9),
     paddingRight: theme.spacing(9),
-    minHeight: "150px",
+    // minHeight: "150px",
   },
 }));
 
@@ -82,13 +87,12 @@ const waveAnimation = keyframes`
 `;
 
 const StyledButton = styled(
-  ({ isBoardPage, isClicked, ...rest }: StyledButtonProps) => (
-    <Button {...rest} />
-  )
-)<StyledButtonProps>(({ theme, isClicked, isBoardPage }) => ({
+  ({ isBoardPage, isOpen, ...rest }: StyledButtonProps) => <Button {...rest} />
+)<StyledButtonProps>(({ theme, isOpen, isBoardPage }) => ({
   margin: "0",
   padding: "0",
   border: "0",
+  zIndex: "19",
   background: "transparent",
   overflow: "visible",
   cursor: "pointer",
@@ -98,33 +102,41 @@ const StyledButton = styled(
   flexDirection: "column",
   "& span": {
     position: "absolute",
+    zIndex: "16",
     left: 0,
     width: "40px",
     height: "3px",
-    backgroundColor: "#fff",
+    backgroundColor: isBoardPage ? "#000" : "#fff",
     borderRadius: "1.5px",
     cursor: "pointer",
   },
   "& .span_color1": {
-    animation: isClicked ? `${rotateOneAnimation} 0.75s forwards` : "none",
+    animation: isOpen ? `${rotateOneAnimation} 0.75s forwards` : "none",
   },
   "& .span_color2": {
-    opacity: isClicked ? "0" : "1",
+    opacity: isOpen ? "0" : "1",
     marginTop: "1.5rem",
   },
   "& .span_color3": {
-    animation: isClicked ? `${rotateTwoAnimation} 0.75s forwards` : "none",
+    animation: isOpen ? `${rotateTwoAnimation} 0.75s forwards` : "none",
     marginTop: "3rem",
   },
 }));
 
 export default function LayoutHeader() {
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.modal.isOpen);
+
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const theme: Theme = useTheme();
 
   const ModalHandler = () => {
-    setIsClicked(!isClicked);
+    if (isOpen) {
+      dispatch(closeModal());
+    } else {
+      dispatch(openModal());
+    }
   };
 
   useEffect(() => {
@@ -142,10 +154,12 @@ export default function LayoutHeader() {
 
   const router = useRouter();
   const isBoardPage = router.pathname === "/board";
+
+  console.log(isOpen, "isOpen");
   return (
     <>
-      {isClicked ? (
-        <HeaderModal isClicked={isClicked} setIsClicked={setIsClicked} />
+      {isOpen ? (
+        <HeaderModal isOpen={isOpen} close={() => dispatch(closeModal())} />
       ) : null}
       <StyledBox
         style={
@@ -155,16 +169,18 @@ export default function LayoutHeader() {
                 ? "unset"
                 : theme.palette.appBarBackground.default,
           } as React.CSSProperties
-        }>
+        }
+      >
         <StyledAppBar position={isBoardPage ? "static" : "fixed"} theme={theme}>
           <Toolbar>
             <StyledButton
               type="button"
               sx={{ flexGrow: 1 }}
               onClick={ModalHandler}
-              isClicked={isClicked}
+              isOpen={isOpen}
               isBoardPage={isBoardPage}
-              disableRipple>
+              disableRipple
+            >
               <span className="span_color1"></span>
               <span className="span_color2"></span>
               <span className="span_color3"></span>
@@ -177,8 +193,10 @@ export default function LayoutHeader() {
                 textAlign: "center",
                 fontFamily: "Poppins, Sans-serif",
                 fontWeight: "600",
+                display: isOpen ? "none" : "block",
               }}
-              sx={{ flexGrow: 1 }}>
+              sx={{ flexGrow: 1 }}
+            >
               PPRK
             </Typography>
             <Typography
@@ -189,8 +207,10 @@ export default function LayoutHeader() {
                 textAlign: "center",
                 fontFamily: "Poppins, Sans-serif",
                 fontWeight: "600",
+                display: isOpen ? "none" : "block",
               }}
-              sx={{ flexGrow: 1 }}>
+              sx={{ flexGrow: 1 }}
+            >
               한국어
             </Typography>
           </Toolbar>
