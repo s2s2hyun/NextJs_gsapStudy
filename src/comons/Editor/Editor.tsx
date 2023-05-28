@@ -85,46 +85,6 @@ export const Editor = React.memo(
       setDescription(value);
     };
 
-    // useEffect(() => {
-    //   if (!quillRef.current || !quillRef.current?.current) return;
-
-    //   const quill = new Quill(quillRef.current.current, {
-    //     theme: "snow",
-    //     modules: {
-    //       toolbar: [
-    //         ["bold", "italic", "underline", "strike"],
-    //         [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    //         [{ size: ["small", false, "large", "huge"] }],
-    //         [{ color: [] }, { background: [] }],
-    //         ["link", "image"],
-    //         ["clean"],
-    //       ],
-    //       ko: true,
-    //     },
-    //   });
-
-    //   const quillInstance = quillRef.current.current.getEditor();
-
-    //   if (quillInstance) {
-    //     quillInstance.on("text-change", () => {
-    //       const html = quillInstance.root.innerHTML.trim();
-    //       setDescription(html);
-    //     });
-
-    //     // 컨텐츠 설정
-    //     if (description) {
-    //       quillInstance.root.innerHTML = description;
-    //     }
-    //   }
-
-    //   return () => {
-    //     if (quillInstance) {
-    //       quillInstance.off("text-change");
-    //       quillInstance.destroy();
-    //     }
-    //   };
-    // }, [description, setDescription]);
-
     const modulesWithImageHandler = {
       toolbar: {
         container: [
