@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 import { Theme } from "@mui/material/styles";
 import arrowImg from "@/assets/icon/arrow_back.png";
 import Image from "next/image";
+import BoardComment from "@/components/Board/BoardComment";
 
 const useStyles = makeStyles((theme: Theme) => ({
   customText: {
@@ -145,6 +146,7 @@ export default function BoardDetailPage() {
           </h2>
         </>
       )}
+      <BoardComment />
     </section>
   );
 }

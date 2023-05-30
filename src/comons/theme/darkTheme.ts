@@ -41,6 +41,13 @@ export const darkTheme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderColor: "yellow",
+        },
+      },
+    },
   },
   custom: {
     container: {

@@ -33,12 +33,11 @@ export default function HeaderModal({ isOpen, close }: HeaderModalProps) {
           <InnerContainer>
             <h4
               style={{ fontSize: "40px", zIndex: "17" }}
-              onClick={BoardHandler}
-            >
+              onClick={BoardHandler}>
               게시판
             </h4>
-            <h4 style={{ fontSize: "40px" }} onClick={BoardHandler}>
-              로그인
+            <h4 style={{ fontSize: "40px" }} onClick={() => router.push("/")}>
+              Home
             </h4>
           </InnerContainer>
         </Container>
@@ -51,7 +50,7 @@ export default function HeaderModal({ isOpen, close }: HeaderModalProps) {
 }
 
 const HeaderModalWrapper = styled("div")<{ isOpen: boolean }>(({ isOpen }) => ({
-  position: "absolute",
+  position: "fixed",
   display: "flex", // add this line
   flexDirection: "column", // add this line
   width: "100%",

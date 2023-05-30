@@ -91,6 +91,13 @@ export const lightTheme: CustomTheme = {
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderColor: "black",
+        },
+      },
+    },
     MuiAppBar: {
       styleOverrides: {
         root: {
