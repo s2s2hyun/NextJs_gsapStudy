@@ -135,27 +135,27 @@ export default function Board() {
       ease: "power1.inOut",
     });
   };
-  // 5/30 업데이트
-  // const fetchBoards = async () => {
-  //   const response = await axios.get("http://localhost:8080/boards");
-  //   return response.data;
-  // };
 
-  // const { data, isLoading, error } = useQuery("boards", fetchBoards);
+  const fetchBoards = async () => {
+    const response = await axios.get("http://localhost:8080/boards");
+    return response.data;
+  };
 
-  // if (isLoading) {
-  //   return "Loading";
-  // }
+  const { data, isLoading, error } = useQuery("boards", fetchBoards);
 
-  // if (error) {
-  //   const errorMessage = (error as CustomError).message;
-  //   return "An Error has occurred: " + errorMessage;
-  // }
-  // if (data) {
-  //   const createdAt = new Date(data[0].createdAt);
-  //   const formattedTime = formatDistanceToNow(createdAt, { addSuffix: true });
-  //   console.log(formattedTime); // Example: '2 hours ago', '5 minutes ago'
-  // }
+  if (isLoading) {
+    return "Loading";
+  }
+
+  if (error) {
+    const errorMessage = (error as CustomError).message;
+    return "An Error has occurred: " + errorMessage;
+  }
+  if (data) {
+    const createdAt = new Date(data[0].createdAt);
+    const formattedTime = formatDistanceToNow(createdAt, { addSuffix: true });
+    console.log(formattedTime); // Example: '2 hours ago', '5 minutes ago'
+  }
 
   return (
     <Wrapper>
@@ -176,7 +176,7 @@ export default function Board() {
           <button onClick={shuffleImages} style={{ marginBottom: "5vh" }}>
             Shuffle
           </button>
-          {/* <TableContainer component={Paper}>
+          <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 375, maxWidth: "xl" }}
               aria-label="customized table">
@@ -221,7 +221,7 @@ export default function Board() {
                 ))}
               </TableBody>
             </Table>
-          </TableContainer> */}
+          </TableContainer>
         </InnerContainer>
       </Container>
     </Wrapper>

@@ -23,7 +23,12 @@ export default function BoardComment() {
         alignItems: "center",
       }}>
       BoardComment
-      <CustomTextField label="Board Comments" />
+      <div>
+        <CustomTextField label="Board Comments" />
+        <button style={{ padding: "0.85rem" }} type="submit">
+          작성
+        </button>
+      </div>
     </div>
   );
 }

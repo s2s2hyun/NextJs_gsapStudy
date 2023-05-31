@@ -156,6 +156,7 @@ export default function LayoutHeader() {
   const isBoardPage = router.pathname === "/board";
 
   // console.log(isOpen, "isOpen");
+
   return (
     <>
       {isOpen ? (
@@ -164,10 +165,7 @@ export default function LayoutHeader() {
       <StyledBox
         style={
           {
-            "--backgroundColor":
-              scrollPosition < 1000
-                ? "unset"
-                : theme.palette.appBarBackground.default,
+            "--backgroundColor": scrollPosition < 1000 ? "unset" : "#000",
           } as React.CSSProperties
         }>
         <StyledAppBar position={isBoardPage ? "static" : "fixed"} theme={theme}>
@@ -192,6 +190,7 @@ export default function LayoutHeader() {
                 fontFamily: "Poppins, Sans-serif",
                 fontWeight: "600",
                 display: isOpen ? "none" : "block",
+                paddingLeft: "6rem",
               }}
               sx={{ flexGrow: 1 }}>
               PPRK

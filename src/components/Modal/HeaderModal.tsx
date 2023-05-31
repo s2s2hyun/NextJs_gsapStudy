@@ -22,7 +22,8 @@ export default function HeaderModal({ isOpen, close }: HeaderModalProps) {
     close();
   };
 
-  const CloseHandler = () => {
+  const HomeHandler = () => {
+    router.push("/");
     close();
   };
 
@@ -36,7 +37,7 @@ export default function HeaderModal({ isOpen, close }: HeaderModalProps) {
               onClick={BoardHandler}>
               게시판
             </h4>
-            <h4 style={{ fontSize: "40px" }} onClick={() => router.push("/")}>
+            <h4 style={{ fontSize: "40px" }} onClick={HomeHandler}>
               Home
             </h4>
           </InnerContainer>

@@ -24,7 +24,6 @@ export default function LayoutFooter() {
   return (
     <FooterBox>
       <Container maxWidth="xl">
-        <div style={{ height: "100px" }}></div>
         <InnerContainer>
           <div
             style={{

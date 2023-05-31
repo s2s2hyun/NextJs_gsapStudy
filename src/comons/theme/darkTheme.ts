@@ -7,7 +7,7 @@ export const darkTheme = createTheme({
     ...lightTheme.palette,
     mode: "dark",
     primary: {
-      main: "#8E26DF",
+      main: "#fff",
     },
     secondary: {
       main: "#FF4081",
@@ -30,6 +30,7 @@ export const darkTheme = createTheme({
       secondary: "#BDBDBD",
     },
   },
+
   components: {
     ...lightTheme.components,
     MuiAppBar: {
@@ -64,6 +65,26 @@ export const darkTheme = createTheme({
       text: {
         darkBtn: "#000",
       },
+    },
+  },
+  typography: {
+    ...lightTheme.typography,
+    fontFamily: "Poppins",
+    fontSize: 16,
+    h1: {
+      color: "#fff",
+      fontSize: "2.4rem",
+      fontWeight: "normal",
+    },
+    h2: {
+      color: "#fff",
+      fontSize: "2rem",
+      fontWeight: "normal",
+    },
+    subtitle1: {
+      color: "#fff",
+      fontSize: "1.6rem",
+      fontWeight: "bold",
     },
   },
 });

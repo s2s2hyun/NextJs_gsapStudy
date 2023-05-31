@@ -18,6 +18,26 @@ interface CustomTheme extends ThemeOptions {
       };
     };
   };
+  typography: {
+    fontFamily: string;
+    fontSize: number;
+    h1: {
+      color: string;
+      fontSize: string;
+      fontWeight: "normal" | "bold";
+    };
+    h2: {
+      color: string;
+      fontSize: string;
+      fontWeight: "normal" | "bold";
+    };
+    subtitle1: {
+      color: string;
+      fontSize: string;
+      fontWeight: "normal" | "bold";
+    };
+    [key: string]: any; // Optional, for any other typography styles you might add later
+  };
 }
 
 declare module "@mui/material/styles" {
@@ -33,7 +53,7 @@ export const lightTheme: CustomTheme = {
     ...baseTheme.palette,
     mode: "light",
     primary: {
-      main: "#8E26DF",
+      main: "#333333",
       light: "#ABCDEF",
       dark: "#123456",
       contrastText: "#fff",
@@ -58,14 +78,19 @@ export const lightTheme: CustomTheme = {
     ...baseTheme.typography,
     fontFamily: "Poppins",
     fontSize: 16,
+    h1: {
+      color: "#000",
+      fontSize: "2.4rem",
+      fontWeight: "normal",
+    },
     h2: {
-      color: "#BDBDBD",
-      fontSize: "4rem",
+      color: "#000",
+      fontSize: "2rem",
       fontWeight: "normal",
     },
     subtitle1: {
-      color: "#333333",
-      fontSize: "4rem",
+      color: "#000",
+      fontSize: "1.6rem",
       fontWeight: "bold",
     },
   },
