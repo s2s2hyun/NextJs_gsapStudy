@@ -142,7 +142,7 @@ export default function Board() {
   };
 
   const { data, isLoading, error } = useQuery("boards", fetchBoards);
-
+  //  useQuery 비동기 처리
   if (isLoading) {
     return "Loading";
   }
@@ -179,7 +179,8 @@ export default function Board() {
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 375, maxWidth: "xl" }}
-              aria-label="customized table">
+              aria-label="customized table"
+            >
               <TableHead>
                 <TableRow>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -200,7 +201,8 @@ export default function Board() {
                 {data.map((row, index) => (
                   <StyledTableRow
                     key={index + 1}
-                    onClick={() => router.push(`/board/${row.id}`)}>
+                    onClick={() => router.push(`/board/${row.id}`)}
+                  >
                     <StyledTableCell component="td" scope="row">
                       {index + 1}
                     </StyledTableCell>
