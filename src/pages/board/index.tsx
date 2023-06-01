@@ -142,7 +142,8 @@ export default function Board() {
   };
 
   const { data, isLoading, error } = useQuery("boards", fetchBoards);
-  //  useQuery 비동기 처리
+  //  useQuery 비동기 처리 6/2
+
   if (isLoading) {
     return "Loading";
   }
