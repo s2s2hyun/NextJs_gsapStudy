@@ -210,7 +210,7 @@ export default function LayoutHeader() {
               }}
               sx={{ flexGrow: 1 }}
             >
-              day To day
+              day To
             </Typography>
           </Toolbar>
         </StyledAppBar>
