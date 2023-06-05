@@ -167,7 +167,8 @@ export default function LayoutHeader() {
           {
             "--backgroundColor": scrollPosition < 1000 ? "unset" : "#000",
           } as React.CSSProperties
-        }>
+        }
+      >
         <StyledAppBar position={isBoardPage ? "static" : "fixed"} theme={theme}>
           <Toolbar>
             <StyledButton
@@ -176,7 +177,8 @@ export default function LayoutHeader() {
               onClick={ModalHandler}
               isOpen={isOpen}
               isBoardPage={isBoardPage}
-              disableRipple>
+              disableRipple
+            >
               <span className="span_color1"></span>
               <span className="span_color2"></span>
               <span className="span_color3"></span>
@@ -192,7 +194,8 @@ export default function LayoutHeader() {
                 display: isOpen ? "none" : "block",
                 paddingLeft: "6rem",
               }}
-              sx={{ flexGrow: 1 }}>
+              sx={{ flexGrow: 1 }}
+            >
               PPRK
             </Typography>
             <Typography
@@ -205,8 +208,9 @@ export default function LayoutHeader() {
                 fontWeight: "600",
                 display: isOpen ? "none" : "block",
               }}
-              sx={{ flexGrow: 1 }}>
-              한국어
+              sx={{ flexGrow: 1 }}
+            >
+              ㅇㄱ
             </Typography>
           </Toolbar>
         </StyledAppBar>
