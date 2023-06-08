@@ -196,7 +196,7 @@ export default function LayoutHeader() {
               }}
               sx={{ flexGrow: 1 }}
             >
-              PPRK
+              LDH Blog
             </Typography>
             <Typography
               variant="h4"
