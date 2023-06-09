@@ -210,7 +210,7 @@ export default function LayoutHeader() {
               }}
               sx={{ flexGrow: 1 }}
             >
-              ㅇㄱ
+              ll
             </Typography>
           </Toolbar>
         </StyledAppBar>
