@@ -2,22 +2,22 @@ import { ThemeProvider, Theme } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { darkTheme } from "../theme/darkTheme";
 import { lightTheme } from "../theme/lightTheme";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { toggleTheme } from "@/store/feature/themeSlice";
 
 interface CustomThemeProviderProps {
   children: React.ReactNode;
 }
 
 const MuiThemeProvider = ({ children }: CustomThemeProviderProps) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
+  // const [isDarkMode, setIsDarkMode] = useState(false);
+  const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
+  const dispatch = useDispatch();
   const handleThemeChange = () => {
-    setIsDarkMode((prev) => !prev);
+    dispatch(toggleTheme());
     console.log(isDarkMode, " isDarkMode");
   };
-
-  // useEffect(() => {
-  //   console.log(isDarkMode, " isDarkMode"); // This will reflect the updated state
-  // }, [isDarkMode]);
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : (lightTheme as Theme)}>
@@ -30,7 +30,8 @@ const MuiThemeProvider = ({ children }: CustomThemeProviderProps) => {
           userSelect: "none",
           zIndex: "10",
         }}
-        onClick={handleThemeChange}>
+        onClick={handleThemeChange}
+      >
         {isDarkMode ? <>☀️</> : <>🌙</>}
       </div>
       {children}

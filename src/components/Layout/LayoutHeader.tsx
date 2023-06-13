@@ -196,7 +196,7 @@ export default function LayoutHeader() {
               }}
               sx={{ flexGrow: 1 }}
             >
-              LDH Blog
+              BLOG
             </Typography>
             <Typography
               variant="h4"
@@ -209,9 +209,7 @@ export default function LayoutHeader() {
                 display: isOpen ? "none" : "block",
               }}
               sx={{ flexGrow: 1 }}
-            >
-              day To
-            </Typography>
+            ></Typography>
           </Toolbar>
         </StyledAppBar>
       </StyledBox>

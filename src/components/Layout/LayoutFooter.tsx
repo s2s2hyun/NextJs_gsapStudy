@@ -6,6 +6,10 @@ import Typography from "@mui/material/Typography";
 import Button, { ButtonProps } from "@mui/material/Button";
 import { keyframes, styled } from "@mui/system";
 import Container from "@mui/material/Container";
+import Image from "next/image";
+import GithubLogo from "../../assets/logo/github-mark.svg";
+import LinkedInLogo from "../../assets/logo/LI-In-Bug.png";
+import InstaLogo from "../../assets/logo/Instagram_Glyph_Gradient.png";
 
 const FooterBox = styled(Box)(({ theme }) => ({
   flexGrow: 1,
@@ -32,7 +36,8 @@ export default function LayoutFooter() {
               alignItems: "center",
               padding: "2.5rem 0 ",
               // textAlign: "center",
-            }}>
+            }}
+          >
             <span>
               ©2023 LDH.
               <br /> All Rights Reserved.
@@ -41,16 +46,25 @@ export default function LayoutFooter() {
             <ul
               style={{
                 display: "flex",
-                gap: "1rem",
+                gap: "1.5rem",
                 listStyle: "none",
                 paddingLeft: "0px",
-              }}>
-              <li>hi</li>
-              <li>hi</li>
-              <li>hi</li>
-              {/* <li>Github</li> */}
-              {/* <li>Blog</li> */}
-              {/* <li>LinkedIn</li> */}
+              }}
+            >
+              <li>
+                <Image src={GithubLogo.src} alt="logo" width={40} height={40} />
+              </li>
+              <li>
+                <Image
+                  src={LinkedInLogo.src}
+                  alt="logo"
+                  width={40}
+                  height={40}
+                />
+              </li>
+              <li>
+                <Image src={InstaLogo.src} alt="logo" width={40} height={40} />
+              </li>
             </ul>
           </div>
         </InnerContainer>
