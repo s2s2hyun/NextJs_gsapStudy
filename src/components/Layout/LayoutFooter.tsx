@@ -52,7 +52,13 @@ export default function LayoutFooter() {
               }}
             >
               <li>
-                <Image src={GithubLogo.src} alt="logo" width={40} height={40} />
+                <Image
+                  src={GithubLogo.src}
+                  alt="logo"
+                  width={40}
+                  height={40}
+                  onClick={() => window.open("https://github.com", "_blank")}
+                />
               </li>
               <li>
                 <Image
@@ -60,10 +66,17 @@ export default function LayoutFooter() {
                   alt="logo"
                   width={40}
                   height={40}
+                  onClick={() => window.open("https://linkedin.com", "_blank")}
                 />
               </li>
               <li>
-                <Image src={InstaLogo.src} alt="logo" width={40} height={40} />
+                <Image
+                  src={InstaLogo.src}
+                  alt="logo"
+                  width={40}
+                  height={40}
+                  onClick={() => window.open("https://instagram.com", "_blank")}
+                />
               </li>
             </ul>
           </div>
