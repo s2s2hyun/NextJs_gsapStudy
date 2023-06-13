@@ -49,7 +49,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 로그인 회원가입은 X
 
-
+댓글 -> input 먼저 리스트는 그후 firebase 로 확인후 mysql
 
 
 
