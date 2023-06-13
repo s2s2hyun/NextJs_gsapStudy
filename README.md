@@ -41,9 +41,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 1. CRUD
 
-유저는 게시글 댓글만 쓰고 지우고만
-
-나는 CRUD 전체적으로 전부 가능
+const categories = ["All", "JavaScript", "React", "CSS" , "Gsap" , "Three.js , React Three Fiber"];
 
 이메일 기능 ㅇ
 
