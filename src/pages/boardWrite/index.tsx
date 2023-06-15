@@ -10,6 +10,9 @@ import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { Box, Button, TextField } from "@mui/material";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 const Editor = dynamic(() => import("@/comons/Editor/Editor"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
@@ -23,8 +26,9 @@ export default function BoardWrite() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [isAddressOpen, setIsAddressOpen] = useState(false);
-  const [address, setAddress] = useState("");
+  // const [isAddressOpen, setIsAddressOpen] = useState(false);
+  // const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -62,19 +66,23 @@ export default function BoardWrite() {
     };
   }, []);
 
-  const showModal = useCallback(() => {
-    setIsAddressOpen(true);
-  }, []);
+  const handleChange = (event: any) => {
+    setCategory(event.target.value);
+  };
 
-  const closeModal = useCallback(() => {
-    setIsAddressOpen(false);
-  }, []);
+  // const showModal = useCallback(() => {
+  //   setIsAddressOpen(true);
+  // }, []);
 
-  const handleComplete = useCallback((data: any) => {
-    setAddress(data.address);
-    // setAddressDetail(data.addressDetail); // Optional: if you want to get address detail
-    closeModal();
-  }, []);
+  // const closeModal = useCallback(() => {
+  //   setIsAddressOpen(false);
+  // }, []);
+
+  // const handleComplete = useCallback((data: any) => {
+  //   setAddress(data.address);
+  //   // setAddressDetail(data.addressDetail); // Optional: if you want to get address detail
+  //   closeModal();
+  // }, []);
 
   useEffect(() => {
     setIsClient(true);
@@ -84,7 +92,7 @@ export default function BoardWrite() {
     <Wrapper>
       <Container maxWidth="xl">
         <InnerContainer>
-          {isAddressOpen ? (
+          {/* {isAddressOpen ? (
             <div
               style={{
                 width: "100%",
@@ -115,8 +123,12 @@ export default function BoardWrite() {
                 {isClient && <DaumPostcode onComplete={handleComplete} />}
               </div>
             </div>
-          ) : null}
-          <div>BoardWrite</div>
+          ) : null} */}
+          <Box sx={{ margin: "1rem 0" }}>
+            <Typography variant="h1" component="h2">
+              게시글 작성
+            </Typography>
+          </Box>
           <form
             onSubmit={handleSubmit}
             style={{
@@ -126,25 +138,65 @@ export default function BoardWrite() {
               flexDirection: "column",
             }}
           >
+            <Box>
+              <CustomSelect
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+                value={category}
+                onChange={handleChange}
+              >
+                <MenuItem value="" disabled>
+                  Placeholder
+                </MenuItem>
+                <MenuItem value={"javascript"}>javascript</MenuItem>
+                <MenuItem value={"react"}>react</MenuItem>
+                <MenuItem value={"r3f"}>r3f</MenuItem>
+              </CustomSelect>
+            </Box>
             <h4>title</h4>
-            <input
+            <TextField
+              sx={{ width: "50%", minWidth: "250px" }}
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
             <h4>description</h4>
             <Editor description={description} setDescription={setDescription} />
 
-            <h4>address</h4>
+            {/* <h4>address</h4>
             <input
               value={address}
               readOnly // 주소는 검색을 통해서만 변경 가능하도록 설정
-            />
-            <button style={{ marginTop: "3rem" }} type="submit">
+            /> */}
+            <Button
+              sx={{
+                fontFamily: "notokr",
+                fontSize: "20px",
+                fontWeight: 500,
+                lineHeight: "100%",
+                color: "#4a5568",
+                padding: "1.5rem 4rem",
+                border: "0",
+                borderRadius: "5px",
+                background: "#dfe5ed",
+                transition: "color 0.2s, background 0.2s",
+                marginTop: "3rem",
+                "&:hover": {
+                  color: "#fff",
+                  background: "#8d99ff",
+                  transition: "color 0.2s, background 0.2s",
+                },
+              }}
+              type="submit"
+            >
+              작성
+            </Button>
+
+            {/* <button style={{  }} type="submit">
               전송
-            </button>
+            </button> */}
           </form>
-          <KakaoMapPageBoard address={address} width={600} height={400} />
-          <button onClick={showModal}>우편번호 검색</button>
+          {/* <KakaoMapPageBoard address={address} width={600} height={400} />
+          <button onClick={showModal}>우편번호 검색</button> */}
         </InnerContainer>
       </Container>
     </Wrapper>
@@ -159,6 +211,7 @@ const Wrapper = styled("section")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+  padding: "100px 0 ",
 }));
 
 const InnerContainer = styled("div")(({ theme }) => ({
@@ -167,4 +220,14 @@ const InnerContainer = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+}));
+
+const CustomSelect = styled(Select)(({ theme }) => ({
+  width: "200px", // 너비를 고정하려는 값
+  display: "flex",
+  // justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
+  textAlign: "center",
 }));

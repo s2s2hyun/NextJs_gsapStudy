@@ -192,7 +192,7 @@ export default function LayoutHeader() {
                 fontFamily: "Poppins, Sans-serif",
                 fontWeight: "600",
                 display: isOpen ? "none" : "block",
-                paddingLeft: "6rem",
+                paddingLeft: "0.5rem",
               }}
               sx={{ flexGrow: 1 }}
             >
