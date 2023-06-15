@@ -273,8 +273,8 @@ export default function BoardDetailPage() {
               </h2>
             </>
           )}
-          {/* <BoardComment />
-          <BoardCommentList /> */}
+          <BoardComment />
+          {/* <BoardCommentList /> */}
         </InnerContainer>
       </Container>
     </Wrapper>
