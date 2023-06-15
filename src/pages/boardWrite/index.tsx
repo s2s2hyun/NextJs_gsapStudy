@@ -27,40 +27,6 @@ export default function BoardWrite() {
   const [address, setAddress] = useState("");
   const router = useRouter();
 
-  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const formData = new FormData();
-
-  //   formData.append("title", title);
-  //   formData.append("description", description);
-
-  //   // Log the contents of formData
-  //   for (let pair of formData.entries()) {
-  //     console.log(pair[0] + ", " + pair[1]);
-  //   }
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8080/boards",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-
-  //     console.log(response.data);
-
-  //     // After writing a post, go directly to the detail of the post you wrote
-  //     const postId = response.data.id;
-  //     router.push(`/board/${postId}`);
-  //     // Redirect to the main page or any other page after successful creation
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -131,7 +97,8 @@ export default function BoardWrite() {
                 left: 0,
                 zIndex: 999,
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-              }}>
+              }}
+            >
               <div id="daumLayer" style={{ zIndex: 1000 }}>
                 <img
                   src="//t1.daumcdn.net/postcode/resource/images/close.png"
@@ -157,7 +124,8 @@ export default function BoardWrite() {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-            }}>
+            }}
+          >
             <h4>title</h4>
             <input
               value={title}
@@ -165,10 +133,7 @@ export default function BoardWrite() {
             />
             <h4>description</h4>
             <Editor description={description} setDescription={setDescription} />
-            {/* <input
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-        /> */}
+
             <h4>address</h4>
             <input
               value={address}
