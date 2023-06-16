@@ -49,11 +49,8 @@ const categories = ["All", "JavaScript", "React", "CSS" , "Gsap" , "Three.js , R
 
 댓글 -> input 먼저 리스트는 그후 firebase 로 확인후 mysql
 
+Mui 댓글 부분쪽 다시 체크 확인후 오늘 submit 까지 테스트 주말중으로 댓글 기능 삭제까지
 
-https://agilejung.tistory.com/entry/MUI-TextField 참고해서 내일 input
-
-로그인
-https://kdabina.tistory.com/166
-
+물론 나만 가능
 
 -->
