@@ -1,8 +1,15 @@
 import React from "react";
+import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { Box, styled } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+
+interface CustomError extends Error {
+  message: string;
+}
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
@@ -20,6 +27,28 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function BoardComment() {
+  // 대기
+  // const fetchBoards = async () => {
+  //   const response = await axios.post("대기");
+  //   return response.data;
+  // };
+
+  // const { data, isLoading, error } = useQuery("boards", fetchBoards);
+  // //  useQuery 비동기 처리 6/4 리액트쿼리
+
+  // if (isLoading) {
+  //   return "Loading";
+  // }
+
+  // if (error) {
+  //   const errorMessage = (error as CustomError).message;
+  //   return "An Error has occurred: " + errorMessage;
+  // }
+  // if (data) {
+
+  //   console.log(data); // Example: '2 hours ago', '5 minutes ago'
+  // }
+
   return (
     <div
       style={{
@@ -27,13 +56,15 @@ export default function BoardComment() {
         justifyContent: "center",
         flexDirection: "column",
         padding: "20px 0 ",
-      }}>
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-        }}>
+        }}
+      >
         <Typography variant="h1" component="h2">
           댓글 제출
         </Typography>
@@ -74,7 +105,8 @@ export default function BoardComment() {
                   transition: "color 0.2s, background 0.2s",
                 },
               }}
-              type="submit">
+              type="submit"
+            >
               작성
             </Button>
           </Box>
