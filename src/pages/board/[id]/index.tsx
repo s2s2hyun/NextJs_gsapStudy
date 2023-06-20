@@ -280,7 +280,7 @@ export default function BoardDetailPage() {
               </h2>
             </>
           )}
-          {id && <BoardComment id={id} />}
+          {typeof id === "string" && <BoardComment id={id} />}
           {/* <BoardCommentList /> */}
         </InnerContainer>
       </Container>
