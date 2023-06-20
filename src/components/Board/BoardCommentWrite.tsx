@@ -11,6 +11,10 @@ interface CustomError extends Error {
   message: string;
 }
 
+interface BoardCommentProps {
+  id: string;
+}
+
 const CustomTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
@@ -52,32 +56,31 @@ const CustomNickNameTextField = styled(TextField)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-export default function BoardComment() {
+export default function BoardComment({ id }: BoardCommentProps) {
   const [commentData, setCommentData] = useState("");
   const [commentEmail, setCommentEmail] = useState("");
   const [commentNickName, setCommentNickName] = useState("");
 
   // 대기
-  // const fetchBoards = async () => {
-  //   const response = await axios.post("대기");
-  //   return response.data;
-  // };
+  const submitComment = async (e: React.FormEvent) => {
+    e.preventDefault(); // 폼 제출 시 페이지가 새로고침되는 것을 방지합니다.
 
-  // const { data, isLoading, error } = useQuery("boards", fetchBoards);
-  // //  useQuery 비동기 처리 6/4 리액트쿼리
+    const commentWriteData = {
+      comment: commentData,
+      email: commentEmail,
+      nickname: commentNickName,
+    };
 
-  // if (isLoading) {
-  //   return "Loading";
-  // }
-
-  // if (error) {
-  //   const errorMessage = (error as CustomError).message;
-  //   return "An Error has occurred: " + errorMessage;
-  // }
-  // if (data) {
-
-  //   console.log(data); // Example: '2 hours ago', '5 minutes ago'
-  // }
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/boards/${id}/comments`,
+        commentWriteData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div
@@ -103,7 +106,7 @@ export default function BoardComment() {
         </Typography>
       </Box>
       <div>
-        <form>
+        <form onSubmit={submitComment}>
           <Box
             sx={{
               display: "flex",
@@ -111,9 +114,18 @@ export default function BoardComment() {
               flexDirection: "column",
             }}
           >
-            <CustomTextField label="*댓글*" />
-            <CustomEmailTextField label="*이메일*" />
-            <CustomNickNameTextField label="*닉네임*" />
+            <CustomTextField
+              label="*댓글*"
+              onChange={(e) => setCommentData(e.target.value)}
+            />
+            <CustomEmailTextField
+              label="*이메일*"
+              onChange={(e) => setCommentEmail(e.target.value)}
+            />
+            <CustomNickNameTextField
+              label="*닉네임*"
+              onChange={(e) => setCommentNickName(e.target.value)}
+            />
           </Box>
           <label>
             <Box sx={{ display: "flex", alignItems: "center" }}>

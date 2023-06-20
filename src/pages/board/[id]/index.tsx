@@ -164,7 +164,8 @@ export default function BoardDetailPage() {
                   alignItems: "center",
                   flexDirection: "column",
                 }}
-                onSubmit={handleUpdate}>
+                onSubmit={handleUpdate}
+              >
                 <h4>Title</h4>
                 <input
                   value={title}
@@ -187,7 +188,8 @@ export default function BoardDetailPage() {
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
-                  }}>
+                  }}
+                >
                   <div
                     style={{
                       position: "relative",
@@ -195,13 +197,15 @@ export default function BoardDetailPage() {
                       minWidth: "480px",
                       margin: "0 auto",
                       flex: "1",
-                    }}>
+                    }}
+                  >
                     <h2>
                       Title:{" "}
                       <span
                         dangerouslySetInnerHTML={{
                           __html: board.title,
-                        }}></span>
+                        }}
+                      ></span>
                     </h2>
                     {allImageSrcs.length > 0 ? (
                       <>
@@ -214,7 +218,8 @@ export default function BoardDetailPage() {
                           modules={[Pagination, Navigation]}
                           onSwiper={(swiper: any) =>
                             (swiperRef.current = swiper)
-                          }>
+                          }
+                        >
                           {allImageSrcs.map((src, index) => (
                             <SwiperSlide key={index}>
                               <div
@@ -225,7 +230,8 @@ export default function BoardDetailPage() {
                                   justifyContent: "center",
                                   alignItems: "center",
                                   overflow: "hidden",
-                                }}>
+                                }}
+                              >
                                 <img
                                   src={src}
                                   alt={`Slide ${index}`}
@@ -260,7 +266,8 @@ export default function BoardDetailPage() {
                       <span
                         dangerouslySetInnerHTML={{
                           __html: description,
-                        }}></span>
+                        }}
+                      ></span>
                     </p>
                   </div>
                 </div>
@@ -273,7 +280,7 @@ export default function BoardDetailPage() {
               </h2>
             </>
           )}
-          <BoardComment />
+          {id && <BoardComment id={id} />}
           {/* <BoardCommentList /> */}
         </InnerContainer>
       </Container>
