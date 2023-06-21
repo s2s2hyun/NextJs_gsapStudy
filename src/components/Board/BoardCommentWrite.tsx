@@ -132,7 +132,7 @@ export default function BoardComment({ id }: BoardCommentProps) {
               <Checkbox {...label} />
               <Typography>
                 다음 번 댓글 작성을 위해 이 브라우저에 이름, 이메일, 그리고
-                웹사이트를 저장합니다.(쿠키저장 예정)
+                웹사이트를 저장합니다.
               </Typography>
             </Box>
           </label>
