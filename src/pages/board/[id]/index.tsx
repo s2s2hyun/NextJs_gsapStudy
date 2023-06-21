@@ -8,7 +8,6 @@ import { Theme } from "@mui/material/styles";
 import arrowImg from "@/assets/icon/arrow_back.png";
 import Image from "next/image";
 import BoardComment from "@/components/Board/BoardCommentWrite";
-import BoardCommentList from "@/components/Board/BoardCommentList";
 import { Typography } from "@mui/material";
 import { TypographyProps } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,6 +16,7 @@ import "swiper/swiper.min.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import BoardCommentList from "@/components/Board/BoardCommentList";
 SwiperCore.use([Navigation, Pagination]);
 type SwiperRef = typeof Swiper | null;
 const Wrapper = styled("div")(({ theme }) => ({
@@ -281,7 +281,7 @@ export default function BoardDetailPage() {
             </>
           )}
           {typeof id === "string" && <BoardComment id={id} />}
-          {/* <BoardCommentList /> */}
+          {typeof id === "string" && <BoardCommentList id={id} />}
         </InnerContainer>
       </Container>
     </Wrapper>

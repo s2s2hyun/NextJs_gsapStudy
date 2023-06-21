@@ -1,30 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Box, styled } from "@mui/system";
 
-export default function BoardCommentList() {
-  // 대기
-  // const fetchBoards = async () => {
-  //   const response = await axios.post("대기");
-  //   return response.data;
-  // };
+interface BoardCommentProps {
+  id: string;
+}
 
-  // const { data, isLoading, error } = useQuery("boards", fetchBoards);
-  // //  useQuery 비동기 처리 6/4 리액트쿼리
+interface CustomError extends Error {
+  message: string;
+}
 
-  // if (isLoading) {
-  //   return "Loading";
-  // }
+export default function BoardCommentList({ id }: BoardCommentProps) {
+  const fetchComments = async () => {
+    const response = await axios.get(
+      `http://localhost:8080/boards/${id}/comments`
+    );
+    return response.data;
+  };
 
-  // if (error) {
-  //   const errorMessage = (error as CustomError).message;
-  //   return "An Error has occurred: " + errorMessage;
-  // }
-  // if (data) {
+  const { data, isLoading, error } = useQuery("commentList", fetchComments);
 
-  //   console.log(data); // Example: '2 hours ago', '5 minutes ago'
-  // }
-  return <div>BoardCommentList</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    const errorMessage = (error as CustomError).message;
+    return <div>An Error has occurred: {errorMessage}</div>;
+  }
+
+  if (data) {
+    return (
+      <div>
+        {data.map((comment, index) => (
+          <div key={index}>
+            <p>{comment.content}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return <div>No comments available</div>; // 모든 경우를 처리하기 위한 기본 반환
 }

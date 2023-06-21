@@ -66,7 +66,7 @@ export default function BoardComment({ id }: BoardCommentProps) {
     e.preventDefault(); // 폼 제출 시 페이지가 새로고침되는 것을 방지합니다.
 
     const commentWriteData = {
-      comment: commentData,
+      content: commentData,
       email: commentEmail,
       nickname: commentNickName,
     };
@@ -81,6 +81,8 @@ export default function BoardComment({ id }: BoardCommentProps) {
       console.error(error);
     }
   };
+
+  console.log();
 
   return (
     <div
