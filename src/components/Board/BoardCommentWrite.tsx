@@ -77,6 +77,9 @@ export default function BoardComment({ id }: BoardCommentProps) {
         commentWriteData
       );
       console.log(response.data);
+      setCommentData("");
+      setCommentEmail("");
+      setCommentNickName("");
     } catch (error) {
       console.error(error);
     }
@@ -118,14 +121,17 @@ export default function BoardComment({ id }: BoardCommentProps) {
           >
             <CustomTextField
               label="*댓글*"
+              value={commentData}
               onChange={(e) => setCommentData(e.target.value)}
             />
             <CustomEmailTextField
               label="*이메일*"
+              value={commentEmail}
               onChange={(e) => setCommentEmail(e.target.value)}
             />
             <CustomNickNameTextField
               label="*닉네임*"
+              value={commentNickName}
               onChange={(e) => setCommentNickName(e.target.value)}
             />
           </Box>
