@@ -36,6 +36,7 @@ export default function BoardCommentList({ id }: BoardCommentProps) {
       <div>
         {data.map((comment, index) => (
           <div key={index}>
+            {/* 댓글 캐릭터사진 추가 예정 */}
             <p>{comment.content}</p>
             <p>{comment.nickname}</p>
           </div>
