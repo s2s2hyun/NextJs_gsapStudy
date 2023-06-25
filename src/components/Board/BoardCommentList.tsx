@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Box, styled } from "@mui/system";
+import Image from "next/image";
 
 interface BoardCommentProps {
   id: string;
@@ -37,6 +38,8 @@ export default function BoardCommentList({ id }: BoardCommentProps) {
         {data.map((comment, index) => (
           <div key={index}>
             {/* 댓글 캐릭터사진 추가 예정 */}
+            {/* Next Image 이미지 파일 선택해야하는데 저작권 없는걸로 찾기 어렵네  */}
+            {/* <Image alt="comment_img_random" /> */}
             <p>{comment.content}</p>
             <p>{comment.nickname}</p>
           </div>
