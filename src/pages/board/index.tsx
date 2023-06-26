@@ -152,7 +152,7 @@ export default function Board() {
     const errorMessage = (error as CustomError).message;
     return "An Error has occurred: " + errorMessage;
   }
-  if (data) {
+  if (data && data.length > 0) {
     const createdAt = new Date(data[0].createdAt);
     const formattedTime = formatDistanceToNow(createdAt, { addSuffix: true });
     console.log(formattedTime); // Example: '2 hours ago', '5 minutes ago'

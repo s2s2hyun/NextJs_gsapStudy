@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import { Box, styled } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import { useMutation, useQueryClient } from "react-query";
 
 interface CustomError extends Error {
   message: string;
@@ -13,6 +14,12 @@ interface CustomError extends Error {
 
 interface BoardCommentProps {
   id: string;
+}
+
+interface CommentWriteData {
+  content: string;
+  email: string;
+  nickname: string;
 }
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
@@ -61,6 +68,26 @@ export default function BoardComment({ id }: BoardCommentProps) {
   const [commentEmail, setCommentEmail] = useState("");
   const [commentNickName, setCommentNickName] = useState("");
 
+  // refetch-query
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation<void, Error, CommentWriteData>(
+    (newComment) =>
+      axios.post(`http://localhost:8080/boards/${id}/comments`, newComment),
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries("commentList");
+        setCommentData("");
+        setCommentEmail("");
+        setCommentNickName("");
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    }
+  );
+
   // 대기
   const submitComment = async (e: React.FormEvent) => {
     e.preventDefault(); // 폼 제출 시 페이지가 새로고침되는 것을 방지합니다.
@@ -71,21 +98,8 @@ export default function BoardComment({ id }: BoardCommentProps) {
       nickname: commentNickName,
     };
 
-    try {
-      const response = await axios.post(
-        `http://localhost:8080/boards/${id}/comments`,
-        commentWriteData
-      );
-      console.log(response.data);
-      setCommentData("");
-      setCommentEmail("");
-      setCommentNickName("");
-    } catch (error) {
-      console.error(error);
-    }
+    mutation.mutate(commentWriteData);
   };
-
-  console.log();
 
   return (
     <div
