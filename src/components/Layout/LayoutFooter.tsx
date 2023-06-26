@@ -10,6 +10,11 @@ import Image from "next/image";
 import GithubLogo from "../../assets/logo/github-mark.svg";
 import LinkedInLogo from "../../assets/logo/LI-In-Bug.png";
 import InstaLogo from "../../assets/logo/Instagram_Glyph_Gradient.png";
+import Dark_GithubLogo from "../../assets/logo/github-mark.svg";
+import Dark_LinkedInLogo from "../../assets/logo/LI-In-Bug.png";
+import Dark_InstaLogo from "../../assets/logo/Instagram_Glyph_Gradient.png";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const FooterBox = styled(Box)(({ theme }) => ({
   flexGrow: 1,
@@ -25,6 +30,11 @@ const InnerContainer = styled("div")(({ theme }) => ({
 }));
 
 export default function LayoutFooter() {
+  const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
+
+  const githubLogo = isDarkMode ? Dark_GithubLogo : GithubLogo;
+  const linkedinLogo = isDarkMode ? Dark_LinkedInLogo : LinkedInLogo;
+  const instaLogo = isDarkMode ? Dark_InstaLogo : InstaLogo;
   return (
     <FooterBox>
       <Container maxWidth="xl">
@@ -53,7 +63,7 @@ export default function LayoutFooter() {
             >
               <li>
                 <Image
-                  src={GithubLogo.src}
+                  src={githubLogo.src}
                   alt="logo"
                   width={40}
                   height={40}
@@ -62,7 +72,7 @@ export default function LayoutFooter() {
               </li>
               <li>
                 <Image
-                  src={LinkedInLogo.src}
+                  src={linkedinLogo.src}
                   alt="logo"
                   width={40}
                   height={40}
@@ -71,7 +81,7 @@ export default function LayoutFooter() {
               </li>
               <li>
                 <Image
-                  src={InstaLogo.src}
+                  src={instaLogo.src}
                   alt="logo"
                   width={40}
                   height={40}
