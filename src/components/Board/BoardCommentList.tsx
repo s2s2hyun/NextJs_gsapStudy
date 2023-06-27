@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
+import Container from "@mui/material/Container";
 import axios from "axios";
 import { Box, styled } from "@mui/system";
 import Image, { StaticImageData } from "next/image";
@@ -22,6 +23,7 @@ import CommentPic15 from "@/assets/icon/Avatar 28.png";
 import CommentPic16 from "@/assets/icon/Avatar 29.png";
 import CommentPic17 from "@/assets/icon/Avatar 30.png";
 import DefaultPic from "@/assets/icon/Avatar 30.png";
+import { Button, Typography } from "@mui/material";
 
 interface BoardCommentProps {
   id: string;
@@ -31,11 +33,34 @@ interface Comment {
   content: string;
   nickname: string;
   pic: string;
+  createdAt: string;
 }
 
 interface CustomError extends Error {
   message: string;
 }
+
+const CustomTypography = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  fontFamily: "Poppins", // 글꼴을 설정하고 싶은 경우
+  // 여기에 추가 스타일 속성을 작성할 수 있습니다.
+}));
+
+const CustomDateTypography = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  fontFamily: "Poppins",
+  fontWeight: "lighter",
+  // 글꼴을 설정하고 싶은 경우
+  // 여기에 추가 스타일 속성을 작성할 수 있습니다.
+}));
+
+const CustomButton = styled(Button)(({ theme }) => ({
+  padding: "1rem",
+  fontFamily: "Poppins",
+  // fontWeight: "lighter",
+  // 글꼴을 설정하고 싶은 경우
+  // 여기에 추가 스타일 속성을 작성할 수 있습니다.
+}));
 
 export default function BoardCommentList({ id }: BoardCommentProps) {
   const imageMap: Record<string, StaticImageData> = {
@@ -78,22 +103,65 @@ export default function BoardCommentList({ id }: BoardCommentProps) {
   }
 
   if (data) {
-    // console.log(data, "data 는 배열에 어떻게 나와? ");
+    const formatDate = (dateString: string) => {
+      const createdAt = new Date(dateString);
+      const date = createdAt.toLocaleDateString("ko-KR");
+      const time = createdAt.toLocaleTimeString("ko-KR", {
+        hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      return `${date} ${time}`;
+    };
+
     return (
-      <div>
+      <Container maxWidth="xl">
         {data.map((comment: Comment, index: number) => {
           const commentPic =
             comment.pic in imageMap ? imageMap[comment.pic] : DefaultPic;
-
+          const formattedDate = formatDate(comment.createdAt);
           return (
-            <div key={index}>
-              <Image src={commentPic} alt="comment_img_random" />
-              <p>{comment.content}</p>
-              <p>{comment.nickname}</p>
-            </div>
+            <Box key={index}>
+              <Box display="flex" justifyContent="space-between">
+                <Box display="flex">
+                  <Box>
+                    <Image
+                      src={commentPic}
+                      alt="comment_img_random"
+                      width={80}
+                      height={80}
+                    />
+                  </Box>
+                  <Box paddingLeft={5}>
+                    <Box display="flex" marginBottom={2}>
+                      <CustomTypography variant="h6">
+                        {comment.nickname}
+                      </CustomTypography>
+                      <CustomDateTypography
+                        style={{
+                          display: "flex",
+                          alignItems: "flex-end",
+                          paddingLeft: "1rem",
+                        }}
+                        variant="subtitle2"
+                      >
+                        {formattedDate}
+                      </CustomDateTypography>
+                    </Box>
+                    <CustomTypography variant="body1">
+                      {comment.content}
+                    </CustomTypography>
+                  </Box>
+                </Box>
+                <Box>
+                  <CustomButton>답장</CustomButton>
+                </Box>
+              </Box>
+            </Box>
           );
         })}
-      </div>
+      </Container>
     );
   }
 

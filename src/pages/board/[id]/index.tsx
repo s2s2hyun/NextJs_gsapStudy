@@ -36,6 +36,7 @@ const InnerContainer = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+  padding: "1rem",
 }));
 
 const TitleTypo = styled(Typography)<TypographyProps>(({ theme }) => ({
@@ -280,8 +281,8 @@ export default function BoardDetailPage() {
               </h2>
             </>
           )}
-          {typeof id === "string" && <BoardComment id={id} />}
           {typeof id === "string" && <BoardCommentList id={id} />}
+          {typeof id === "string" && <BoardComment id={id} />}
         </InnerContainer>
       </Container>
     </Wrapper>

@@ -88,7 +88,6 @@ export default function BoardComment({ id }: BoardCommentProps) {
     }
   );
 
-  // 대기
   const submitComment = async (e: React.FormEvent) => {
     e.preventDefault(); // 폼 제출 시 페이지가 새로고침되는 것을 방지합니다.
 
