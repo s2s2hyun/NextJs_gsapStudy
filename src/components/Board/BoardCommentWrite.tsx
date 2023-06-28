@@ -33,6 +33,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
   },
   width: "100%",
   minWidth: "300px",
+  paddingBottom: "1rem",
 }));
 
 const CustomEmailTextField = styled(TextField)(({ theme }) => ({
@@ -46,6 +47,7 @@ const CustomEmailTextField = styled(TextField)(({ theme }) => ({
   },
   width: "50%",
   minWidth: "200px",
+  paddingBottom: "1rem",
 }));
 
 const CustomNickNameTextField = styled(TextField)(({ theme }) => ({
@@ -59,6 +61,7 @@ const CustomNickNameTextField = styled(TextField)(({ theme }) => ({
   },
   width: "50%",
   minWidth: "200px",
+  paddingBottom: "1rem",
 }));
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -137,6 +140,7 @@ export default function BoardComment({ id }: BoardCommentProps) {
               label="*댓글*"
               value={commentData}
               onChange={(e) => setCommentData(e.target.value)}
+              multiline
             />
             <CustomEmailTextField
               label="*이메일*"
@@ -161,10 +165,9 @@ export default function BoardComment({ id }: BoardCommentProps) {
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               sx={{
-                fontFamily: "notokr",
+                fontFamily: "Poppins",
+                fontWeight: "600",
                 fontSize: "20px",
-                fontWeight: 500,
-                lineHeight: "100%",
                 color: "#4a5568",
                 padding: "20px 30px",
                 border: "0",
@@ -179,7 +182,7 @@ export default function BoardComment({ id }: BoardCommentProps) {
               }}
               type="submit"
             >
-              작성
+              코멘트 제출
             </Button>
           </Box>
         </form>

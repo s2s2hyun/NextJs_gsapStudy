@@ -27,6 +27,11 @@ export default function HeaderModal({ isOpen, close }: HeaderModalProps) {
     close();
   };
 
+  const ContactHandler = () => {
+    router.push("/contact");
+    close();
+  };
+
   return (
     <HeaderModalWrapper isOpen={isOpen}>
       <Wrapper className="gallery">
@@ -34,11 +39,15 @@ export default function HeaderModal({ isOpen, close }: HeaderModalProps) {
           <InnerContainer>
             <h4
               style={{ fontSize: "40px", zIndex: "17" }}
-              onClick={BoardHandler}>
+              onClick={BoardHandler}
+            >
               게시판
             </h4>
             <h4 style={{ fontSize: "40px" }} onClick={HomeHandler}>
               Home
+            </h4>
+            <h4 style={{ fontSize: "40px" }} onClick={ContactHandler}>
+              CONTACT
             </h4>
           </InnerContainer>
         </Container>
