@@ -7,7 +7,7 @@ import { Box, styled } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { useMutation, useQueryClient } from "react-query";
-
+import Container from "@mui/material/Container";
 interface CustomError extends Error {
   message: string;
 }
@@ -101,7 +101,8 @@ export default function BoardComment({ id }: BoardCommentProps) {
   };
 
   return (
-    <div
+    <Container
+      maxWidth="md"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -116,10 +117,10 @@ export default function BoardComment({ id }: BoardCommentProps) {
           flexDirection: "column",
         }}
       >
-        <Typography variant="h1" component="h2">
+        <Typography variant="h4" component="h5" sx={{ margin: "20px 0" }}>
           댓글 제출
         </Typography>
-        <Typography sx={{ fontWeight: "bold" }}>
+        <Typography sx={{ fontWeight: "normal", paddingBottom: "20px" }}>
           이메일 주소는 공개되지 않습니다. 필수 필드는 *로 표시됩니다.
         </Typography>
       </Box>
@@ -183,6 +184,6 @@ export default function BoardComment({ id }: BoardCommentProps) {
           </Box>
         </form>
       </div>
-    </div>
+    </Container>
   );
 }

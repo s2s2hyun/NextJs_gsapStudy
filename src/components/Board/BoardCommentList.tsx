@@ -116,7 +116,7 @@ export default function BoardCommentList({ id }: BoardCommentProps) {
     };
 
     return (
-      <Container maxWidth="xl">
+      <Container maxWidth="md">
         {data.map((comment: Comment, index: number) => {
           const commentPic =
             comment.pic in imageMap ? imageMap[comment.pic] : DefaultPic;
