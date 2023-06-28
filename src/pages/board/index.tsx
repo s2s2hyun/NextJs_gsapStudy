@@ -165,7 +165,6 @@ export default function Board() {
           <ImgGalleryCtr ref={imageContainerRef}>
             {images.map((src, index) => (
               <ImgGalleryContent key={src}>
-                {/* Change from key={index} to key={src} */}
                 <Image
                   ref={(el) => (imageRefs.current[index] = el)}
                   src={src}
