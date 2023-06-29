@@ -1,10 +1,11 @@
 const style = `
     font-family: Segoe UI;
     font-size: 100px;
-    color: #FF0000;
+    color: #71b313;
     text-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 5px black;
 `;
-console.log("%c DONGHYUN", style);
+// console.log("%c DONGHYUN", style);
+setTimeout(console.log.bind(console, "%cDONGHYUN", style), 0);
 
 // function logImage(url) {
 //   const image = new Image();
