@@ -27,8 +27,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
   boxShadow: "none",
 }));
 
+// 포지션 fixed 에서 수정 ㄱㄱㄱㄱㄱㄱㄱ
+// 컬러는 theme 에 맞춰서
 const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
-  position: "fixed",
+  // position: "fixed",
   backdropFilter: "none",
   justifyContent: "flex-start",
   boxShadow: "none",
