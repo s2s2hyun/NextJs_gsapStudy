@@ -30,12 +30,10 @@ const StyledBox = styled(Box)(({ theme }) => ({
 // 포지션 fixed 에서 수정 ㄱㄱㄱㄱㄱㄱㄱ
 // 컬러는 theme 에 맞춰서
 const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
-  // position: "fixed",
   backdropFilter: "none",
   justifyContent: "flex-start",
   boxShadow: "none",
   zIndex: "16",
-  // minHeight: "150px",
   backgroundColor: "var(--backgroundColor)",
   paddingLeft: theme.spacing(10),
   paddingRight: theme.spacing(10),
@@ -49,13 +47,11 @@ const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
   [theme.breakpoints.between("sm", "lg")]: {
     paddingLeft: theme.spacing(6),
     paddingRight: theme.spacing(6),
-    // minHeight: "120px",
   },
 
   [theme.breakpoints.up("lg")]: {
     paddingLeft: theme.spacing(9),
     paddingRight: theme.spacing(9),
-    // minHeight: "150px",
   },
 }));
 
