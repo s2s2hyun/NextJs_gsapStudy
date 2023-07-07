@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 
 const Wrapper = styled("div")(({ theme }) => ({
   width: "100%",
+  marginTop: "100px",
   height: "100vh",
   display: "flex",
   flexDirection: "column",
@@ -72,12 +73,22 @@ export default function ContactPage() {
   return (
     <Wrapper>
       <Container maxWidth="md">
+        <Box style={{ padding: "2rem 0" }}>
+          <div style={{ borderLeft: "5px solid #e2e8f0" }}>
+            <Typography
+              style={{ paddingLeft: "2rem", fontFamily: "Poppins" }}
+              variant="h4">
+              Contact
+            </Typography>
+          </div>
+        </Box>
         <InnerContainer>
-          <Box sx={{ borderLeftWidth: "5px", borderLeftColor: "#000" }}>
+          {/* <Box sx={{ borderLeftWidth: "5px", borderLeftColor: "#000" }}>
             <Typography variant="h3" style={{ fontFamily: "Poppins" }}>
               CONTACT
             </Typography>
-          </Box>
+          </Box> */}
+
           <Box
             sx={{
               width: "100%",

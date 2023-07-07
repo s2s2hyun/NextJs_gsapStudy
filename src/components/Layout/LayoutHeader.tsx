@@ -33,7 +33,7 @@ const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
   justifyContent: "flex-start",
   boxShadow: "none",
   zIndex: "16",
-
+  color: "#000",
   backgroundColor: "var(--backgroundColor)",
   paddingLeft: theme.spacing(10),
   paddingRight: theme.spacing(10),
@@ -95,7 +95,7 @@ const StyledButton = styled(
   overflow: "visible",
   cursor: "pointer",
   lineHeight: "1",
-  color: "#fff",
+  color: "#000",
   display: "flex",
   flexDirection: "column",
   "& span": {
@@ -153,7 +153,17 @@ export default function LayoutHeader() {
   const router = useRouter();
   const isBoardPage = router.pathname === "/board";
 
-  // console.log(isOpen, "isOpen");
+  const ClickContact = () => {
+    router.push("/contact");
+  };
+
+  const ClickAbout = () => {
+    router.push("/about");
+  };
+
+  const ClickBlog = () => {
+    router.push("/board");
+  };
 
   return (
     <>
@@ -175,12 +185,31 @@ export default function LayoutHeader() {
                 <Typography>(로고)S2s2hyun</Typography>
               </Box>
               <Box display="flex" style={{ gap: "2rem" }}>
-                <Typography style={{ fontFamily: "Poppins" }}>Blog</Typography>
-                <Typography style={{ fontFamily: "Poppins" }}>
+                <Typography
+                  style={{ fontFamily: "Poppins", cursor: "pointer" }}
+                  onClick={ClickBlog}
+                  variant="h6">
+                  Blog
+                </Typography>
+                <Typography
+                  style={{
+                    fontFamily: "Poppins",
+                    cursor: "pointer",
+                  }}
+                  onClick={ClickBlog}
+                  variant="h6">
                   Project
                 </Typography>
-                <Typography style={{ fontFamily: "Poppins" }}>About</Typography>
-                <Typography style={{ fontFamily: "Poppins" }}>
+                <Typography
+                  style={{ fontFamily: "Poppins", cursor: "pointer" }}
+                  onClick={ClickAbout}
+                  variant="h6">
+                  About
+                </Typography>
+                <Typography
+                  style={{ fontFamily: "Poppins", cursor: "pointer" }}
+                  onClick={ClickContact}
+                  variant="h6">
                   Contact
                 </Typography>
               </Box>

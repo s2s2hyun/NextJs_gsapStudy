@@ -66,7 +66,10 @@ export default function LayoutFooter() {
                   alt="logo"
                   width={40}
                   height={40}
-                  onClick={() => window.open("https://github.com", "_blank")}
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    window.open("https://github.com/s2s2hyun", "_blank")
+                  }
                 />
               </li>
               <li>
@@ -75,7 +78,13 @@ export default function LayoutFooter() {
                   alt="logo"
                   width={40}
                   height={40}
-                  onClick={() => window.open("https://linkedin.com", "_blank")}
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    window.open(
+                      "https://www.linkedin.com/in/%EB%8F%99%ED%98%84-%EC%9E%84-06ba14240/",
+                      "_blank"
+                    )
+                  }
                 />
               </li>
               <li>
@@ -84,7 +93,10 @@ export default function LayoutFooter() {
                   alt="logo"
                   width={40}
                   height={40}
-                  onClick={() => window.open("https://instagram.com", "_blank")}
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    window.open("https://www.instagram.com/d.hyun_/", "_blank")
+                  }
                 />
               </li>
             </ul>
