@@ -8,6 +8,7 @@ import { keyframes } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
 import styled from "@emotion/styled";
 import { Theme } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 import HeaderModal from "../Modal/HeaderModal";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,13 +28,12 @@ const StyledBox = styled(Box)(({ theme }) => ({
   boxShadow: "none",
 }));
 
-// 포지션 fixed 에서 수정 ㄱㄱㄱㄱㄱㄱㄱ
-// 컬러는 theme 에 맞춰서
 const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
   backdropFilter: "none",
   justifyContent: "flex-start",
   boxShadow: "none",
   zIndex: "16",
+
   backgroundColor: "var(--backgroundColor)",
   paddingLeft: theme.spacing(10),
   paddingRight: theme.spacing(10),
@@ -157,58 +157,35 @@ export default function LayoutHeader() {
 
   return (
     <>
-      {isOpen ? (
-        <HeaderModal isOpen={isOpen} close={() => dispatch(closeModal())} />
-      ) : null}
-      <StyledBox
-        style={
-          {
-            "--backgroundColor": scrollPosition < 1000 ? "unset" : "#000",
-          } as React.CSSProperties
-        }
-      >
+      <StyledBox>
         <StyledAppBar position={isBoardPage ? "static" : "fixed"} theme={theme}>
-          <Toolbar>
-            <StyledButton
-              type="button"
-              sx={{ flexGrow: 1 }}
-              onClick={ModalHandler}
-              isOpen={isOpen}
-              isBoardPage={isBoardPage}
-              disableRipple
-            >
-              <span className="span_color1"></span>
-              <span className="span_color2"></span>
-              <span className="span_color3"></span>
-            </StyledButton>
-            <Typography
-              variant="h4"
-              component="div"
-              style={{
-                color: isBoardPage ? "red" : "blue",
-                textAlign: "center",
-                fontFamily: "Poppins, Sans-serif",
-                fontWeight: "600",
-                display: isOpen ? "none" : "block",
-                paddingLeft: "0.5rem",
-              }}
-              sx={{ flexGrow: 1 }}
-            >
-              BLOG
-            </Typography>
-            <Typography
-              variant="h4"
-              component="div"
-              style={{
-                color: isBoardPage ? "red" : "blue",
-                textAlign: "center",
-                fontFamily: "Poppins, Sans-serif",
-                fontWeight: "600",
-                display: isOpen ? "none" : "block",
-              }}
-              sx={{ flexGrow: 1 }}
-            ></Typography>
-          </Toolbar>
+          <Container
+            maxWidth="lg"
+            style={
+              {
+                backgroundColor: scrollPosition < 1000 ? "unset" : "#000",
+              } as React.CSSProperties
+            }>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              style={{ height: "100px" }}>
+              <Box>
+                <Typography>(로고)S2s2hyun</Typography>
+              </Box>
+              <Box display="flex" style={{ gap: "2rem" }}>
+                <Typography style={{ fontFamily: "Poppins" }}>Blog</Typography>
+                <Typography style={{ fontFamily: "Poppins" }}>
+                  Project
+                </Typography>
+                <Typography style={{ fontFamily: "Poppins" }}>About</Typography>
+                <Typography style={{ fontFamily: "Poppins" }}>
+                  Contact
+                </Typography>
+              </Box>
+            </Box>
+          </Container>
         </StyledAppBar>
       </StyledBox>
     </>

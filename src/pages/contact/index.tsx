@@ -73,7 +73,7 @@ export default function ContactPage() {
     <Wrapper>
       <Container maxWidth="md">
         <InnerContainer>
-          <Box sx={{ borderLeftWidth: "5px", borderLeftColor: "#000;" }}>
+          <Box sx={{ borderLeftWidth: "5px", borderLeftColor: "#000" }}>
             <Typography variant="h3" style={{ fontFamily: "Poppins" }}>
               CONTACT
             </Typography>
@@ -83,15 +83,14 @@ export default function ContactPage() {
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
-            }}
-          >
+            }}>
             <CustomEmailTextField
               placeholder="이메일"
               //   value={commentEmail}
               //   onChange={(e) => setCommentEmail(e.target.value)}
             />
             <CustomNickNameTextField
-              placeholder="닉네임"
+              placeholder="이름"
               //   value={commentNickName}
               //   onChange={(e) => setCommentNickName(e.target.value)}
             />
@@ -104,8 +103,7 @@ export default function ContactPage() {
             rows={4}
           />
           <Box
-            sx={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
-          >
+            sx={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
             <Button
               sx={{
                 fontFamily: "Poppins",
@@ -123,8 +121,7 @@ export default function ContactPage() {
                   transition: "color 0.2s, background 0.2s",
                 },
               }}
-              type="submit"
-            >
+              type="submit">
               이메일 전송
             </Button>
           </Box>

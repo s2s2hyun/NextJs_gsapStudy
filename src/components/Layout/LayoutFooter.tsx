@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 const FooterBox = styled(Box)(({ theme }) => ({
+  paddingTop: "5rem",
   flexGrow: 1,
   backdropFilter: "none",
   boxShadow: "none",
@@ -37,7 +38,7 @@ export default function LayoutFooter() {
   const instaLogo = isDarkMode ? Dark_InstaLogo : InstaLogo;
   return (
     <FooterBox>
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <InnerContainer>
           <div
             style={{
@@ -46,8 +47,7 @@ export default function LayoutFooter() {
               alignItems: "center",
               padding: "2.5rem 0 ",
               // textAlign: "center",
-            }}
-          >
+            }}>
             <span>
               ©2023 LDH.
               <br /> All Rights Reserved.
@@ -59,8 +59,7 @@ export default function LayoutFooter() {
                 gap: "1.5rem",
                 listStyle: "none",
                 paddingLeft: "0px",
-              }}
-            >
+              }}>
               <li>
                 <Image
                   src={githubLogo.src}

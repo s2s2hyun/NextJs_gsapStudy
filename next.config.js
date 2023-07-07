@@ -15,5 +15,3 @@ module.exports = {
   ...nextConfig,
   webpack: webpackConfig,
 };
-
-// 내일 webpackConfig 관해서 공부

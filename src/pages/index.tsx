@@ -115,19 +115,7 @@ export default function Home() {
     });
   };
 
-  const [boardList, setBoardList] = useState<Board[]>([]);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8080/boards")
-  //     .then((res) => {
-  //       setBoardList(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   const router = useRouter();
 
