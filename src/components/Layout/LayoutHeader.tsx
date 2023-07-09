@@ -9,11 +9,13 @@ import { useTheme } from "@mui/material/styles";
 import styled from "@emotion/styled";
 import { Theme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
-import HeaderModal from "../Modal/HeaderModal";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { closeModal, openModal } from "@/store/feature/modalSlice";
+import Image from "next/image";
+import Header_Light_Logo from "../../assets/logo/header_light.png";
+import Header_Dark_Logo from "../../assets/logo/header_dark.png";
 
 interface StyledButtonProps extends ButtonProps {
   isClicked?: boolean;
@@ -124,9 +126,12 @@ const StyledButton = styled(
 export default function LayoutHeader() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.modal.isOpen);
-
+  const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  const headerLogo = isDarkMode ? Header_Light_Logo : Header_Dark_Logo;
+
   const theme: Theme = useTheme();
 
   const ModalHandler = () => {
@@ -175,20 +180,23 @@ export default function LayoutHeader() {
               {
                 backgroundColor: scrollPosition < 1000 ? "unset" : "#000",
               } as React.CSSProperties
-            }>
+            }
+          >
             <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              style={{ height: "100px" }}>
+              style={{ height: "100px" }}
+            >
               <Box>
-                <Typography>(로고)S2s2hyun</Typography>
+                <Image src={headerLogo} alt="blog_logo" />
               </Box>
               <Box display="flex" style={{ gap: "2rem" }}>
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickBlog}
-                  variant="h6">
+                  variant="h6"
+                >
                   Blog
                 </Typography>
                 <Typography
@@ -197,19 +205,22 @@ export default function LayoutHeader() {
                     cursor: "pointer",
                   }}
                   onClick={ClickBlog}
-                  variant="h6">
+                  variant="h6"
+                >
                   Project
                 </Typography>
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickAbout}
-                  variant="h6">
+                  variant="h6"
+                >
                   About
                 </Typography>
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickContact}
-                  variant="h6">
+                  variant="h6"
+                >
                   Contact
                 </Typography>
               </Box>
