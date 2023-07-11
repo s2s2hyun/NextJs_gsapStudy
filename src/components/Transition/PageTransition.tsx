@@ -1,27 +1,27 @@
-import { useRouter } from 'next/router'
-import React, { useRef } from 'react'
-import { TransitionGroup, Transition } from 'react-transition-group'
+import { useRouter } from "next/router";
+import React, { useRef } from "react";
+import { TransitionGroup, Transition } from "react-transition-group";
 
 type Position =
-  | 'absolute'
-  | 'relative'
-  | 'fixed'
-  | 'sticky'
-  | 'static'
-  | 'inherit'
+  | "absolute"
+  | "relative"
+  | "fixed"
+  | "sticky"
+  | "static"
+  | "inherit";
 
 type TransitionStyle = {
   [key: string]: {
-    position?: Position
-    opacity?: number
-    transition?: string
-  }
-}
+    position?: Position;
+    opacity?: number;
+    transition?: string;
+  };
+};
 
-const TIMEOUT = 200
+const TIMEOUT = 200;
 const getTransitionStyle: TransitionStyle = {
   entering: {
-    position: 'absolute',
+    position: "absolute",
     opacity: 0,
   },
   entered: {
@@ -32,14 +32,17 @@ const getTransitionStyle: TransitionStyle = {
     transition: `opacity ${TIMEOUT}ms ease, transform ${TIMEOUT}ms ease`,
     opacity: 0,
   },
-}
+};
 
 function PageTransition({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
-  const nodeRef = useRef(null)
+  const router = useRouter();
+  const nodeRef = useRef(null);
 
   return (
-    <TransitionGroup style={{ position: 'relative' }}>
+    <TransitionGroup
+      component={React.Fragment}
+      style={{ position: "relative" }}
+    >
       <Transition
         key={router.pathname}
         nodeRef={nodeRef}
@@ -55,7 +58,7 @@ function PageTransition({ children }: { children: React.ReactNode }) {
         )}
       </Transition>
     </TransitionGroup>
-  )
+  );
 }
 
-export default PageTransition
+export default PageTransition;

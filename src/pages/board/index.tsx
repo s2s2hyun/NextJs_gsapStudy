@@ -95,46 +95,46 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-gsap.registerPlugin(Flip);
+// gsap.registerPlugin(Flip);
 
 export default function Board() {
   const locale = "ko";
   const router = useRouter();
   const imageContainerRef = useRef<HTMLImageElement | null>(null);
-  const [images, setImages] = useState([
-    "https://i.pinimg.com/564x/d7/1f/de/d71fdefc2807e04725c36c1be25c8de4.jpg",
-    "https://images.unsplash.com/photo-1619087940820-d3fcb8a26b56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-    "https://images.unsplash.com/photo-1599669846660-945c5c775181?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=8",
-    "https://images.unsplash.com/photo-1682687220015-186f63b8850a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1075&q=80",
-    "https://media.cnn.com/api/v1/images/stellar/prod/201221102826-airpods-max.jpg?q=x_2,y_0,h_1130,w_2008,c_crop/h_540,w_960/f_webp",
-    "https://images.pexels.com/photos/3721098/pexels-photo-3721098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    "https://i.pinimg.com/564x/74/16/9d/74169d2c69f5ec4a1be705b928940165.jpg",
-    "https://i.pinimg.com/564x/f7/0c/a0/f70ca0ff3073bbe93cd4584fbbc35ecd.jpg",
-  ]);
-  const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  // const [images, setImages] = useState([
+  //   "https://i.pinimg.com/564x/d7/1f/de/d71fdefc2807e04725c36c1be25c8de4.jpg",
+  //   "https://images.unsplash.com/photo-1619087940820-d3fcb8a26b56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
+  //   "https://images.unsplash.com/photo-1599669846660-945c5c775181?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=8",
+  //   "https://images.unsplash.com/photo-1682687220015-186f63b8850a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1075&q=80",
+  //   "https://media.cnn.com/api/v1/images/stellar/prod/201221102826-airpods-max.jpg?q=x_2,y_0,h_1130,w_2008,c_crop/h_540,w_960/f_webp",
+  //   "https://images.pexels.com/photos/3721098/pexels-photo-3721098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  //   "https://i.pinimg.com/564x/74/16/9d/74169d2c69f5ec4a1be705b928940165.jpg",
+  //   "https://i.pinimg.com/564x/f7/0c/a0/f70ca0ff3073bbe93cd4584fbbc35ecd.jpg",
+  // ]);
+  // const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   // get reference to the image container and its children
-  const shuffleImages = () => {
-    // get reference to the image container and its children
-    const grid = imageContainerRef.current;
-    const items = grid ? Array.from(grid.children) : [];
+  // const shuffleImages = () => {
+  //   // get reference to the image container and its children
+  //   const grid = imageContainerRef.current;
+  //   const items = grid ? Array.from(grid.children) : [];
 
-    // get the current state
-    const state = Flip.getState(items);
+  //   // get the current state
+  //   const state = Flip.getState(items);
 
-    // shuffle
-    for (let i = items.length - 1; i >= 0; i--) {
-      if (grid) {
-        grid.appendChild(items[Math.floor(Math.random() * (i + 1))]);
-      }
-    }
+  //   // shuffle
+  //   for (let i = items.length - 1; i >= 0; i--) {
+  //     if (grid) {
+  //       grid.appendChild(items[Math.floor(Math.random() * (i + 1))]);
+  //     }
+  //   }
 
-    // animate the changes
-    Flip.from(state, {
-      absolute: true,
-      duration: 1,
-      ease: "power1.inOut",
-    });
-  };
+  //   // animate the changes
+  //   Flip.from(state, {
+  //     absolute: true,
+  //     duration: 1,
+  //     ease: "power1.inOut",
+  //   });
+  // };
 
   const fetchBoards = async () => {
     const response = await axios.get("http://localhost:8080/boards");
@@ -162,7 +162,7 @@ export default function Board() {
     <Wrapper>
       <Container maxWidth="xl">
         <InnerContainer>
-          <ImgGalleryCtr ref={imageContainerRef}>
+          {/* <ImgGalleryCtr ref={imageContainerRef}>
             {images.map((src, index) => (
               <ImgGalleryContent key={src}>
                 <Image
@@ -175,11 +175,12 @@ export default function Board() {
           </ImgGalleryCtr>
           <button onClick={shuffleImages} style={{ marginBottom: "5vh" }}>
             Shuffle
-          </button>
+          </button> */}
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 375, maxWidth: "xl" }}
-              aria-label="customized table">
+              aria-label="customized table"
+            >
               <TableHead>
                 <TableRow>
                   <StyledTableCell style={{ width: "10%" }}>

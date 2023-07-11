@@ -166,6 +166,10 @@ export default function LayoutHeader() {
     router.push("/about");
   };
 
+  const ClickProject = () => {
+    router.push("/project");
+  };
+
   const ClickBlog = () => {
     router.push("/board");
   };
@@ -180,12 +184,14 @@ export default function LayoutHeader() {
               {
                 backgroundColor: scrollPosition < 1000 ? "unset" : "#000",
               } as React.CSSProperties
-            }>
+            }
+          >
             <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              style={{ height: "100px" }}>
+              style={{ height: "100px" }}
+            >
               <Box>
                 <Image src={headerLogo} alt="blog_logo" />
               </Box>
@@ -193,28 +199,32 @@ export default function LayoutHeader() {
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickBlog}
-                  variant="h6">
+                  variant="h6"
+                >
                   Blog
                 </Typography>
-                <Typography
+                {/* <Typography
                   style={{
                     fontFamily: "Poppins",
                     cursor: "pointer",
                   }}
-                  onClick={ClickBlog}
-                  variant="h6">
+                  onClick={ClickProject}
+                  variant="h6"
+                >
                   Project
-                </Typography>
+                </Typography> */}
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickAbout}
-                  variant="h6">
+                  variant="h6"
+                >
                   About
                 </Typography>
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickContact}
-                  variant="h6">
+                  variant="h6"
+                >
                   Contact
                 </Typography>
               </Box>
