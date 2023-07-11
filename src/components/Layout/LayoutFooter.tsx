@@ -13,8 +13,11 @@ import InstaLogo from "../../assets/logo/Instagram_Glyph_Gradient.png";
 import Dark_GithubLogo from "../../assets/logo/github-mark.svg";
 import Dark_LinkedInLogo from "../../assets/logo/LI-In-Bug.png";
 import Dark_InstaLogo from "../../assets/logo/Instagram_Glyph_Gradient.png";
+
+import footer_Logo from "@/assets/logo/footer.png";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useRouter } from "next/router";
 
 const FooterBox = styled(Box)(({ theme }) => ({
   paddingTop: "5rem",
@@ -36,6 +39,13 @@ export default function LayoutFooter() {
   const githubLogo = isDarkMode ? Dark_GithubLogo : GithubLogo;
   const linkedinLogo = isDarkMode ? Dark_LinkedInLogo : LinkedInLogo;
   const instaLogo = isDarkMode ? Dark_InstaLogo : InstaLogo;
+
+  const router = useRouter();
+
+  const ClickHome = () => {
+    router.push("/");
+  };
+
   return (
     <FooterBox>
       <Container maxWidth="lg">
@@ -52,7 +62,14 @@ export default function LayoutFooter() {
               ©2023 LDH.
               <br /> All Rights Reserved.
             </span>
-            <span>Send Email</span>
+            <span>
+              <Image
+                src={footer_Logo}
+                alt="footer_logo"
+                onClick={ClickHome}
+                style={{ cursor: "pointer" }}
+              />
+            </span>
             <ul
               style={{
                 display: "flex",

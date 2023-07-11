@@ -179,8 +179,7 @@ export default function Board() {
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 375, maxWidth: "xl" }}
-              aria-label="customized table"
-            >
+              aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell style={{ width: "10%" }}>
@@ -198,7 +197,7 @@ export default function Board() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map((row, index) => (
+                {/* {data.map((row, index) => (
                   <StyledTableRow
                     key={index + 1}
                     onClick={() => router.push(`/board/${row.id}`)}
@@ -220,7 +219,7 @@ export default function Board() {
                       })}
                     </StyledTableCell>
                   </StyledTableRow>
-                ))}
+                ))} */}
               </TableBody>
             </Table>
           </TableContainer>

@@ -130,7 +130,7 @@ export default function LayoutHeader() {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  const headerLogo = isDarkMode ? Header_Light_Logo : Header_Dark_Logo;
+  const headerLogo = isDarkMode ? Header_Dark_Logo : Header_Light_Logo;
 
   const theme: Theme = useTheme();
 
@@ -180,14 +180,12 @@ export default function LayoutHeader() {
               {
                 backgroundColor: scrollPosition < 1000 ? "unset" : "#000",
               } as React.CSSProperties
-            }
-          >
+            }>
             <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              style={{ height: "100px" }}
-            >
+              style={{ height: "100px" }}>
               <Box>
                 <Image src={headerLogo} alt="blog_logo" />
               </Box>
@@ -195,8 +193,7 @@ export default function LayoutHeader() {
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickBlog}
-                  variant="h6"
-                >
+                  variant="h6">
                   Blog
                 </Typography>
                 <Typography
@@ -205,22 +202,19 @@ export default function LayoutHeader() {
                     cursor: "pointer",
                   }}
                   onClick={ClickBlog}
-                  variant="h6"
-                >
+                  variant="h6">
                   Project
                 </Typography>
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickAbout}
-                  variant="h6"
-                >
+                  variant="h6">
                   About
                 </Typography>
                 <Typography
                   style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickContact}
-                  variant="h6"
-                >
+                  variant="h6">
                   Contact
                 </Typography>
               </Box>

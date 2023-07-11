@@ -6,6 +6,8 @@ import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
+import AboutMePic from "@/assets/picture/About_me.jpg";
+
 import GithubLogo from "../../assets/logo/github-mark.svg";
 import LinkedInLogo from "../../assets/logo/LI-In-Bug.png";
 import InstaLogo from "../../assets/logo/Instagram_Glyph_Gradient.png";
@@ -28,7 +30,7 @@ const Wrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   backgroundColor: theme.palette.background.default,
   overflowX: "hidden",
-  marginTop: "150px",
+  marginTop: "100px",
 }));
 
 const InnerContainer = styled("div")(({ theme }) => ({
@@ -60,14 +62,25 @@ export default function AboutPage() {
           </Box> */}
           {/* 사진 + 소개글 */}
           <Box
-            style={{ paddingTop: "2rem" }}
+            style={{ width: "70%", paddingTop: "2rem" }}
             display="flex"
             flexDirection="column">
-            <Box display="flex">
+            <Box display="flex" justifyContent="space-between">
               <Box>
-                <div style={{ width: "374px", height: "374px" }}>사진</div>
+                <Image
+                  src={AboutMePic}
+                  alt="picture"
+                  style={{
+                    width: "100%",
+                    maxWidth: "400px",
+                    height: "auto",
+                  }}
+                />
               </Box>
-              <Box display="flex" flexDirection="column">
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="center">
                 <Typography style={{ fontFamily: "Poppins" }}>Hi!</Typography>
                 <Typography style={{ fontFamily: "Poppins" }}>
                   Welcome to my Blog!
