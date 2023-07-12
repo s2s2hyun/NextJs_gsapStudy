@@ -27,11 +27,13 @@ const FooterBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
 }));
 
-const InnerContainer = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  width: "100%",
-  borderTop: "1px solid #ebebeb",
-}));
+const InnerContainer = styled("div")<{ isDarkMode: boolean }>(
+  ({ theme, isDarkMode }) => ({
+    backgroundColor: theme.palette.background.default,
+    width: "100%",
+    borderTop: `1px solid ${isDarkMode ? "#000" : "#ebebeb"}`,
+  })
+);
 
 export default function LayoutFooter() {
   const isDarkMode = useSelector((state: RootState) => state.theme.isDarkMode);
@@ -49,7 +51,7 @@ export default function LayoutFooter() {
   return (
     <FooterBox>
       <Container maxWidth="lg">
-        <InnerContainer>
+        <InnerContainer isDarkMode={isDarkMode}>
           <div
             style={{
               display: "flex",

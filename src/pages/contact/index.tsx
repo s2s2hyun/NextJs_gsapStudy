@@ -13,7 +13,6 @@ import Cookies from "js-cookie";
 
 const Wrapper = styled("div")(({ theme }) => ({
   width: "100%",
-  marginTop: "100px",
   height: "64vh",
   display: "flex",
   flexDirection: "column",

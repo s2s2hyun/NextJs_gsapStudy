@@ -66,54 +66,54 @@ export default function Home() {
   const thirdText = useRef(null);
   const fourthText = useRef(null);
 
-  useEffect(() => {
-    gsap.registerEffect({
-      name: "textEffect",
-      extendTimeline: true,
-      defaults: {
-        y: 30,
-        opacity: 0,
-      },
-      effect: (target: any, config: EffectConfig) => {
-        // console.log(target[0].dataset.index, "타겟 "); 1,2,3,4 를 찍어주고있다.
-        const index = target[0].dataset.index;
-        const tl = gsap.timeline();
-        const FirstSplit = new SplitText(target, { type: "chars" });
-        // const { y } = config.y;
-        // const { opacity } = config.opacity;
-        tl.from(FirstSplit.chars, {
-          y: config.y,
-          opacity: config.opacity,
-          stagger: 0.1,
-        }).to(FirstSplit.chars, {
-          delay: 3.2,
-          opacity: config.opacity,
-          stagger: 0.03,
-        });
+  // useEffect(() => {
+  //   gsap.registerEffect({
+  //     name: "textEffect",
+  //     extendTimeline: true,
+  //     defaults: {
+  //       y: 30,
+  //       opacity: 0,
+  //     },
+  //     effect: (target: any, config: EffectConfig) => {
+  //       // console.log(target[0].dataset.index, "타겟 "); 1,2,3,4 를 찍어주고있다.
+  //       const index = target[0].dataset.index;
+  //       const tl = gsap.timeline();
+  //       const FirstSplit = new SplitText(target, { type: "chars" });
+  //       // const { y } = config.y;
+  //       // const { opacity } = config.opacity;
+  //       tl.from(FirstSplit.chars, {
+  //         y: config.y,
+  //         opacity: config.opacity,
+  //         stagger: 0.1,
+  //       }).to(FirstSplit.chars, {
+  //         delay: 3.2,
+  //         opacity: config.opacity,
+  //         stagger: 0.03,
+  //       });
 
-        return tl;
-      },
-    });
+  //       return tl;
+  //     },
+  //   });
 
-    textAnimaiton();
-  }, []);
+  //   textAnimaiton();
+  // }, []);
 
-  // 텍스트 애니메이션
-  const textAnimaiton = () => {
-    const animation = gsap.timeline();
-    animation
-      .add(gsap.effects.textEffect(firstText.current))
-      .add(gsap.effects.textEffect(secondText.current))
-      .add(gsap.effects.textEffect(thirdText.current))
-      .add(gsap.effects.textEffect(fourthText.current));
+  // // 텍스트 애니메이션
+  // const textAnimaiton = () => {
+  //   const animation = gsap.timeline();
+  //   animation
+  //     .add(gsap.effects.textEffect(firstText.current))
+  //     .add(gsap.effects.textEffect(secondText.current))
+  //     .add(gsap.effects.textEffect(thirdText.current))
+  //     .add(gsap.effects.textEffect(fourthText.current));
 
-    animation.eventCallback("onUpdate", () => {
-      //   console.log(animation.progress());
-      if (animation.progress() === 1) {
-        animation.restart();
-      }
-    });
-  };
+  //   animation.eventCallback("onUpdate", () => {
+  //     //   console.log(animation.progress());
+  //     if (animation.progress() === 1) {
+  //       animation.restart();
+  //     }
+  //   });
+  // };
 
   const dispatch = useDispatch();
 
@@ -148,7 +148,7 @@ export default function Home() {
         <meta property="og:image" content={data.imageURL} />
       </Head> */}
       <CustomBackground>
-        <div
+        {/* <div
           style={{
             width: "100%",
             height: "100vh",
@@ -170,10 +170,10 @@ export default function Home() {
             }}>
             <source src="/video/backVideo1.mp4" type="video/mp4" />
           </video>
-        </div>
+        </div> */}
         <Container maxWidth="xl">
           <InnerContainer>
-            <WordDiv>
+            {/* <WordDiv>
               <div className="word">
                 <div className="ex1" data-index="1" ref={firstText}>
                   Relaxing <span>PIC</span>
@@ -188,7 +188,7 @@ export default function Home() {
                   Romantic <span>PIC</span>
                 </div>
               </div>
-            </WordDiv>
+            </WordDiv> */}
           </InnerContainer>
         </Container>
       </CustomBackground>

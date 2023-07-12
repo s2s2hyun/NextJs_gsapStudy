@@ -20,6 +20,14 @@ interface CustomError extends Error {
   message: string;
 }
 
+interface DataItem {
+  id: string;
+  title: string;
+  category: string;
+  createdAt: string;
+  description: string;
+}
+
 const Wrapper = styled("div")(({ theme }) => ({
   width: "100%",
   //   height: "100vh",
@@ -144,6 +152,8 @@ export default function Board() {
   const { data, isLoading, error } = useQuery("boards", fetchBoards);
   //  useQuery 비동기 처리 6/4 리액트쿼리
 
+  console.log(data, " data : 는 ? ");
+
   if (isLoading) {
     return "Loading";
   }
@@ -176,54 +186,23 @@ export default function Board() {
           <button onClick={shuffleImages} style={{ marginBottom: "5vh" }}>
             Shuffle
           </button> */}
-          <TableContainer component={Paper}>
-            <Table
-              sx={{ minWidth: 375, maxWidth: "xl" }}
-              aria-label="customized table"
-            >
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell style={{ width: "10%" }}>
-                    Num
-                  </StyledTableCell>
-                  <StyledTableCell style={{ width: "40%" }} align="center">
-                    Title
-                  </StyledTableCell>
-                  <StyledTableCell align="center" style={{ width: "25%" }}>
-                    Status
-                  </StyledTableCell>
-                  <StyledTableCell align="center" style={{ width: "25%" }}>
-                    Create At
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {/* {data.map((row, index) => (
-                  <StyledTableRow
-                    key={index + 1}
-                    onClick={() => router.push(`/board/${row.id}`)}
-                  >
-                    <StyledTableCell component="td" scope="row">
-                      {index + 1}
-                    </StyledTableCell>
-                    <StyledTableCell align="center" component="th">
-                      {row.title}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {row.status}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {formatDistanceToNow(new Date(row.createdAt), {
-                        locale: locale === "ko" ? ko : enUS,
-                        addSuffix: true,
-                        includeSeconds: false,
-                      })}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))} */}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          {data.map((item: DataItem, index: number) => {
+            const createdAt = new Date(item.createdAt);
+            const formattedTime = createdAt.toLocaleString("ko-KR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+            return (
+              <div key={index}>
+                <h2>{item.title}</h2>
+                <p>{item.category}</p>
+                <p>{formattedTime}</p>
+              </div>
+            );
+          })}
         </InnerContainer>
       </Container>
     </Wrapper>

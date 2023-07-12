@@ -39,18 +39,14 @@ function PageTransition({ children }: { children: React.ReactNode }) {
   const nodeRef = useRef(null);
 
   return (
-    <TransitionGroup
-      component={React.Fragment}
-      style={{ position: "relative" }}
-    >
+    <TransitionGroup component="div" style={{ position: "relative" }}>
       <Transition
         key={router.pathname}
         nodeRef={nodeRef}
         timeout={{
           enter: TIMEOUT,
           exit: TIMEOUT,
-        }}
-      >
+        }}>
         {(status) => (
           <div ref={nodeRef} style={{ ...getTransitionStyle[status] }}>
             {children}

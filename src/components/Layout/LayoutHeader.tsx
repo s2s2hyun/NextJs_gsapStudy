@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button, { ButtonProps } from "@mui/material/Button";
 import { keyframes } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
-import styled from "@emotion/styled";
+import { styled } from "@mui/system";
 import { Theme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { useRouter } from "next/router";
@@ -25,9 +25,10 @@ interface StyledButtonProps extends ButtonProps {
 
 const StyledBox = styled(Box)(({ theme }) => ({
   flexGrow: 1,
-  // backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.background.default,
   backdropFilter: "none",
   boxShadow: "none",
+  height: "130px",
 }));
 
 const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
@@ -54,6 +55,15 @@ const StyledAppBar = styled(AppBar)(({ theme }: { theme: Theme }) => ({
   [theme.breakpoints.up("lg")]: {
     paddingLeft: theme.spacing(9),
     paddingRight: theme.spacing(9),
+  },
+}));
+
+const CTypography = styled(Typography)(({ theme }) => ({
+  fontFamily: "Poppins",
+  cursor: "pointer",
+  color: "#718096",
+  "&:hover": {
+    color: "#5a69eb",
   },
 }));
 
@@ -174,35 +184,36 @@ export default function LayoutHeader() {
     router.push("/board");
   };
 
+  const ClickLogo = () => {
+    router.push("/");
+  };
+
   return (
     <>
       <StyledBox>
-        <StyledAppBar position={isBoardPage ? "static" : "fixed"} theme={theme}>
+        <StyledAppBar position="static" theme={theme}>
           <Container
             maxWidth="lg"
             style={
               {
                 backgroundColor: scrollPosition < 1000 ? "unset" : "#000",
               } as React.CSSProperties
-            }
-          >
+            }>
             <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              style={{ height: "100px" }}
-            >
+              style={{ height: "100px" }}>
               <Box>
-                <Image src={headerLogo} alt="blog_logo" />
+                <Image src={headerLogo} alt="blog_logo" onClick={ClickLogo} />
               </Box>
               <Box display="flex" style={{ gap: "2rem" }}>
-                <Typography
-                  style={{ fontFamily: "Poppins", cursor: "pointer" }}
+                <CTypography
+                  // style={{ fontFamily: "Poppins", cursor: "pointer" }}
                   onClick={ClickBlog}
-                  variant="h6"
-                >
+                  variant="h6">
                   Blog
-                </Typography>
+                </CTypography>
                 {/* <Typography
                   style={{
                     fontFamily: "Poppins",
@@ -213,20 +224,12 @@ export default function LayoutHeader() {
                 >
                   Project
                 </Typography> */}
-                <Typography
-                  style={{ fontFamily: "Poppins", cursor: "pointer" }}
-                  onClick={ClickAbout}
-                  variant="h6"
-                >
+                <CTypography onClick={ClickAbout} variant="h6">
                   About
-                </Typography>
-                <Typography
-                  style={{ fontFamily: "Poppins", cursor: "pointer" }}
-                  onClick={ClickContact}
-                  variant="h6"
-                >
+                </CTypography>
+                <CTypography onClick={ClickContact} variant="h6">
                   Contact
-                </Typography>
+                </CTypography>
               </Box>
             </Box>
           </Container>

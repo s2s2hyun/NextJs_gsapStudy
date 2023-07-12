@@ -19,12 +19,7 @@ export const darkTheme = createTheme({
       default: "#333333",
       paper: "#181818",
     },
-    appBarBackground: {
-      default: "#000",
-    },
-    modalBackground: {
-      default: "#000",
-    },
+
     text: {
       primary: "#ffffff",
       secondary: "#BDBDBD",

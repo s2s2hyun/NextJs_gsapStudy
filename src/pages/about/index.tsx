@@ -30,7 +30,6 @@ const Wrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   backgroundColor: theme.palette.background.default,
   overflowX: "hidden",
-  marginTop: "100px",
 }));
 
 const InnerContainer = styled("div")(({ theme }) => ({

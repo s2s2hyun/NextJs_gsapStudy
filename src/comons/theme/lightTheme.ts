@@ -62,12 +62,6 @@ export const lightTheme: CustomTheme = {
       default: "#ffffff",
       paper: "#f0f0f0",
     },
-    appBarBackground: {
-      default: "#212C92",
-    },
-    modalBackground: {
-      default: "#212C92",
-    },
     text: {
       primary: "#333333",
       secondary: "#BDBDBD",
@@ -79,17 +73,17 @@ export const lightTheme: CustomTheme = {
     fontFamily: "Poppins",
     fontSize: 16,
     h1: {
-      color: "#000",
+      color: "#718096",
       fontSize: "2.4rem",
       fontWeight: "normal",
     },
     h2: {
-      color: "#000",
+      color: "#718096",
       fontSize: "2rem",
       fontWeight: "normal",
     },
     subtitle1: {
-      color: "#000",
+      color: "#718096",
       fontSize: "1.6rem",
       fontWeight: "bold",
     },
