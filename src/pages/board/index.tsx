@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Container from "@mui/material/Container";
-import { styled } from "@mui/system";
+import { Box, styled } from "@mui/system";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -16,6 +16,7 @@ import { formatDistanceToNow, format, parse } from "date-fns";
 import { enUS, ko } from "date-fns/locale";
 import { useRouter } from "next/router";
 import { keyframes } from "@emotion/react";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 interface CustomError extends Error {
   message: string;
 }
@@ -26,6 +27,8 @@ interface DataItem {
   category: string;
   createdAt: string;
   description: string;
+  commentCount: number;
+  writer: string;
 }
 
 const Wrapper = styled("div")(({ theme }) => ({
@@ -37,6 +40,7 @@ const Wrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   backgroundColor: theme.palette.background.default,
   overflowX: "hidden",
+  paddingTop: "30px",
 }));
 
 const InnerContainer = styled("div")(({ theme }) => ({
@@ -45,6 +49,23 @@ const InnerContainer = styled("div")(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
+}));
+
+const CardArticle = styled("article")(({ theme }) => ({
+  padding: "10px",
+
+  transition: "transform 0.5s ease",
+  "&:hover": {
+    transform: "translateY(-10px)",
+  },
+}));
+
+const ItemCard = styled(Card)(({ theme }) => ({
+  background: "#fff",
+}));
+
+const ItemCardContents = styled(CardContent)(({ theme }) => ({
+  padding: "24px , 26px",
 }));
 
 const ImgGalleryCtr = styled("div")(({ theme }) => ({
@@ -104,6 +125,93 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 // gsap.registerPlugin(Flip);
+// 사진 첫번째 description 에 이미지 태그만 골라내기
+const extractFirstImageURL = (description: string): string | null => {
+  const regex = /<img[^>]+src="([^">]+)"/;
+  const match = description.match(regex);
+  return match ? match[1] : null;
+};
+
+// description 에 이미지, 각종 태그들 전부 걸러내고 오직 텍스트만 보이는 방법
+// &nbsp;는 HTML에서 공백 문자를 나타내는 엔티티 코드입니다. 따라서 이 코드를 제거하여 해당 공백 문자를 숨길 수 있습니다.
+const stripHtmlTags = (html: string): string => {
+  const regex = /(<([^>]+)>)/gi;
+  const strippedHtml = html.replace(regex, "");
+  const strippedText = strippedHtml.replace(/&nbsp;/g, " ");
+  return strippedText;
+};
+
+const BoardItem = ({
+  id,
+  title,
+  category,
+  description,
+  createdAt,
+  commentCount,
+  writer,
+}: DataItem) => {
+  const firstImageURL = extractFirstImageURL(description);
+
+  return (
+    <CardArticle>
+      <ItemCard>
+        {firstImageURL && (
+          <div style={{ padding: "20px" }}>
+            <a>
+              <img
+                src={firstImageURL}
+                alt="First Image"
+                style={{ width: "320px", height: "250px" }}
+                // sizes="(max-width: 479px) 479px, 100vw"
+                // width="400"
+                // height="250"
+              />
+            </a>
+          </div>
+        )}
+        <ItemCardContents>
+          <h2>
+            <a style={{ fontSize: "20px" }}>{title}</a>
+          </h2>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              fontSize: "12px",
+              gap: "4px",
+              color: "#718096!important",
+              lineHeight: "140%",
+            }}>
+            <p>작성자 {writer.toUpperCase()}</p> <span> | </span>
+            <p>{createdAt}</p>
+            <span> | </span>
+            <p>{category}</p>
+          </Box>
+          <p
+            style={{
+              fontSize: "12px",
+              color: "#718096",
+              lineHeight: "140%",
+            }}>
+            {commentCount}댓글
+          </p>
+          <p
+            style={{
+              overflow: "hidden",
+              display: "-webkit-box",
+              fontSize: "14px",
+              color: "#718096",
+              // @ts-ignore
+              "-webkit-line-clamp": "3",
+              "-webkit-box-orient": "vertical",
+            }}>
+            {stripHtmlTags(description)}
+          </p>
+        </ItemCardContents>
+      </ItemCard>
+    </CardArticle>
+  );
+};
 
 export default function Board() {
   const locale = "ko";
@@ -186,23 +294,30 @@ export default function Board() {
           <button onClick={shuffleImages} style={{ marginBottom: "5vh" }}>
             Shuffle
           </button> */}
-          {data.map((item: DataItem, index: number) => {
-            const createdAt = new Date(item.createdAt);
-            const formattedTime = createdAt.toLocaleString("ko-KR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-            return (
-              <div key={index}>
-                <h2>{item.title}</h2>
-                <p>{item.category}</p>
-                <p>{formattedTime}</p>
-              </div>
-            );
-          })}
+          <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+            {data.map((item: DataItem) => {
+              const createdAt = new Date(item.createdAt);
+              const formattedTime = createdAt.toLocaleString("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+
+              return (
+                <Grid item key={item.id} xs={12} sm={6} md={4} lg={3.2}>
+                  <BoardItem
+                    id={item.id}
+                    title={item.title}
+                    category={item.category}
+                    description={item.description}
+                    createdAt={formattedTime}
+                    commentCount={item.commentCount}
+                    writer={item.writer}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
         </InnerContainer>
       </Container>
     </Wrapper>

@@ -30,7 +30,7 @@ const GlobalStyles = () => (
 
       body {
         margin: 0;
-        font-family: "Poppins", Sans-serif;
+        font-family: "Poppins", "NotoKr-Medium";
         overflow-x: hidden;
       }
     `}

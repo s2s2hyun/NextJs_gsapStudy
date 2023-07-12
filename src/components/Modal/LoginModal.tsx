@@ -19,20 +19,18 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Modal from "@mui/material/Modal";
 import LoginLogo from "@/assets/icon/Group.png";
+import { closeModal } from "@/store/feature/modalSlice";
 
 interface LoginModalProps {
-  setIsLogginModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoginModalOpen: boolean;
+  isOpen: boolean;
 }
 
-export default function LoginModalPage({
-  setIsLogginModalOpen,
-  isLoginModalOpen,
-}: LoginModalProps) {
+export default function LoginModalPage({ isOpen }: LoginModalProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
+  const dispatch = useDispatch();
+  // const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -64,7 +62,7 @@ export default function LoginModalPage({
   };
 
   const ClickCloseModal = () => {
-    setIsLogginModalOpen(!isLoginModalOpen);
+    dispatch(closeModal());
   };
 
   return (
@@ -72,7 +70,7 @@ export default function LoginModalPage({
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={isLoginModalOpen}
+        open={isOpen}
         onClose={ClickCloseModal}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
@@ -81,7 +79,7 @@ export default function LoginModalPage({
             timeout: 500,
           },
         }}>
-        <Fade in={isLoginModalOpen}>
+        <Fade in={isOpen}>
           <Box
             sx={{
               position: "absolute",

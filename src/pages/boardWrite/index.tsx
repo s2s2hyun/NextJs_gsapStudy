@@ -41,6 +41,7 @@ export default function BoardWrite() {
         title,
         description,
         category,
+        writer: localStorage.getItem("username"),
       });
 
       console.log(response.data);
@@ -140,15 +141,13 @@ export default function BoardWrite() {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-            }}
-          >
+            }}>
             <Box>
               <CustomSelect
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
                 value={category}
-                onChange={handleChange}
-              >
+                onChange={handleChange}>
                 <MenuItem value="" disabled>
                   Placeholder
                 </MenuItem>
@@ -190,8 +189,7 @@ export default function BoardWrite() {
                   transition: "color 0.2s, background 0.2s",
                 },
               }}
-              type="submit"
-            >
+              type="submit">
               작성
             </Button>
 
